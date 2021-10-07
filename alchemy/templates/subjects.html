@@ -1,0 +1,37 @@
+<!-- This template of the HomePage is a child of MainTemplate -->
+{% extends "_main_template.html" %}
+
+<!-- Load static files -->
+{% load static %}
+
+<!-- Put title -->
+{%block title%}
+Asignaturas
+{% endblock %}
+
+<!-- Put content -->
+{% block content %}
+    <header>
+        <h1>Asignaturas</h1>
+    </header>
+    <nav>
+        <ul>
+            {% for subject in object_list %}
+                <li>
+                    <a href="">{{subject.name}}</a>
+                    {%if perms.subjects.change_subject%}
+                    <a href="{% url 'edit_subject' subject.id %}">Editar</a>
+                    {%endif%}
+                    {%if perms.subjects.delete_subject%}
+                    <a href="{% url 'delete_subject' subject.id %}">Eliminar</a>
+                    {%endif%}
+                </li>
+            {% endfor %}
+        </ul>
+    </nav>
+
+    {%if perms.subjects.add_subject%}
+        <a href={%url 'create_subject'%}>Añadir nueva asignatura</a>
+    {%endif%}
+
+{% endblock %}

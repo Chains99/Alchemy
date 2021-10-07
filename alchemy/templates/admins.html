@@ -1,0 +1,46 @@
+<!-- This template of the HomePage is a child of MainTemplate -->
+{% extends "_main_template.html" %}
+
+<!-- Load static files -->
+{% load static %}
+
+<!-- Put title -->
+{%block title%}
+Administradores
+{% endblock %}
+
+<!-- Put content -->
+{% block content %}
+    <header>
+        <h1>Administradores</h1>
+    </header>
+    <table border="2">
+        <thead>
+            <tr>
+                <th>Nombre de usuario</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Correo electrónico</th>
+                {% if perms.admins.delete_admin %}
+                    <th>Eliminar administrador</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for admin in object_list %}
+            <tr>
+                <td>{{admin.username}}</td>
+                <td>{{admin.first_name}}</td>
+                <td>{{admin.last_name}}</td>
+                <td>{{admin.email}}</td>
+                {% if perms.admins.delete_admin %}                    
+                    <td><a href="{% url 'delete_admin' admin.id %}">Eliminar</a></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {%if perms.admins.add_admin%}
+        <a href={%url 'register_admin'%}>Registrar nuevo administrador</a>
+    {%endif%}
+{% endblock %}

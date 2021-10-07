@@ -1,0 +1,18 @@
+<!-- This template of the HomePage is a child of MainTemplate -->
+{% extends "_main_template.html" %}
+
+<!-- Load static files -->
+{% load static %}
+
+<!-- Put title -->
+{%block title%}
+Estudiantes
+{% endblock %}
+
+<!-- Put content -->
+{% block content %}
+    <form method="post"> {% csrf_token %}
+    <h1>Seguro desea eliminar al usuario {{object.username}}?</h1>
+    <button type="submit">Confirmar</button>
+</form>
+{% endblock %}

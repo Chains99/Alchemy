@@ -1,0 +1,27 @@
+<!-- This template of the HomePage is a child of MainTemplate -->
+{% extends "_main_template.html" %}
+
+<!-- Load static files -->
+{% load static %}
+
+<!-- Put title -->
+{%block title%}
+Asignaturas
+{% endblock %}
+
+<!-- Put content -->
+{% block content %}
+    <header>
+        <h1>Profes</h1>
+    </header>
+    <nav>
+        <ul>
+            {% for imparts in object_list %}
+                <li>
+                    <a href=>{{imparts.professor.name}}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </nav>
+
+{% endblock %}

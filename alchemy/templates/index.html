@@ -1,0 +1,29 @@
+<!-- This template of the HomePage is a child of MainTemplate -->
+{% extends "_main_template.html" %}
+
+<!-- Load static files -->
+{% load static %}
+
+<!-- Put title -->
+{%block title%}
+Inicio
+{% endblock %}
+
+<!-- Put content -->
+{% block content %}
+    <div class="text-center bg-yugioh main-img">
+        <img class="img-responsive w-90 maxw-90" src="{% static 'img/alchemy.jpg' %}">
+    </div>
+    <section class="container mb-3 mt-3">
+        <article class="row">
+            <div class="col-12">
+                <h1 class="text-center">Descripción de Alquimia</h1>
+                <p>En esta aplicación web se presentan diferentes asignaturas. Los estudiantes se puedan matricular en ellas</p>
+                <p>El profesor de una asignatura define los elementos básicos de esa asignatura y el valor en créditos de cada elemento que defina.</p>
+                <p>Si un estudiante está matriculado en una asignatura este puede acceder a una página que le permite hacer mezclas con los elementos que él posee de dicha asignatura. La forma de hacerlo es que este escoja dos elementos que posee y con eso determine un tercero dando una justificación de porqué hace esa mezcla. Para las mezclas, un estudiante solo pueden utilizar los elementos básicos o los que haya formado.</p>
+                <p>Luego un profe de la asignatura revisa las "solicitudes" de mezclas propuestas por los estudiantes y las valida o no. Si la valida el estudiante gana créditos igual a la suma de los créditos de los elementos que usó para formar la mezcla y ese elemento que formó pasa a ser suyo. Además el valor del elemento obtenido es igual a la cantidad de créditos que ganó por hacer dicha mezcla.</p>
+            </div>
+        </article>
+    </section>
+
+{% endblock %}
