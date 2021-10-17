@@ -1,3 +1,4 @@
+from apps.students.models import Student
 from django.views.generic import ListView,CreateView,DeleteView,UpdateView
 from .models import Subject
 from django.contrib.auth.mixins import PermissionRequiredMixin
@@ -5,6 +6,9 @@ from django.shortcuts import redirect
 from apps.imparts.models import Imparts
 from .forms import SubjectCreateForm
 from django.urls import reverse_lazy
+from apps.admins.models import Admin
+from apps.study.models import Study
+from django.http import HttpResponseForbidden
 
 class SubjectList(ListView,PermissionRequiredMixin):
     model=Subject
@@ -35,9 +39,21 @@ class SubjectDelete(PermissionRequiredMixin,DeleteView):
     permission_required='subjects.delete_subject'
     permission_denied_message='Acceso denegado. Usuario no autorizado'
 
-def professor_or_student(request,pk):
+def professor_or_student_or_admin(request,pk):
     try:
-        Imparts.objects.get(subject=pk,professor=request.user.id)
+        Admin.objects.get(id=request.user.id)
     except:
-        return redirect('subject_student',pk)
-    return redirect('subject_professor',pk)
+        try:
+            Imparts.objects.get(subject=pk,professor=request.user.id)
+        except:
+            try:
+                Study.objects.get(subject=pk,student=request.user.id)
+            except:
+                try:
+                    Student.objects.get(id=request.user.id)
+                except:
+                    return HttpResponseForbidden()
+                return redirect('enroll',pk)
+            return redirect('subject_student',pk)
+        return redirect('subject_professor',pk)
+    return redirect('subject_admin',pk)

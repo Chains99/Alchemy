@@ -18,7 +18,7 @@ Asignaturas
         <ul>
             {% for subject in object_list %}
                 <li>
-                    <a href="">{{subject.name}}</a>
+                    <a href={%url 'select' subject.id%}>{{subject.name}}</a>
                     {%if perms.subjects.change_subject%}
                     <a href="{% url 'edit_subject' subject.id %}">Editar</a>
                     {%endif%}

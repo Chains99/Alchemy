@@ -41,13 +41,13 @@ INSTALLED_APPS = [
     'apps.main',
     'apps.professors',
     'apps.students',
+    'apps.admins',
     'apps.subjects',
     'apps.elements',
     'apps.imparts',
     'apps.study',
     'apps.basic_elements',
-    'apps.non_basic_elements',
-    'apps.admins'
+    'apps.non_basic_elements'
 ]
 
 MIDDLEWARE = [

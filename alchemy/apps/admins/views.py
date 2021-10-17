@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from .forms import AdminRegisterForm
 from django.views.generic import CreateView,ListView,DeleteView
 from django.urls import reverse_lazy
@@ -10,6 +11,8 @@ from apps.professors.models import Professor
 from apps.subjects.models import Subject
 from apps.imparts.models import Imparts
 from apps.students.models import Student
+from apps.study.models import Study
+
 
 class AdminList(ListView,PermissionRequiredMixin):
     model=Admin
@@ -64,6 +67,13 @@ class AdminCreate(CreateView,PermissionRequiredMixin):
             )
             user.user_permissions.add(permission)
 
+            content_type=ContentType.objects.get_for_model(Study)
+            permission=Permission.objects.get(
+                codename=perm+'_'+'study',
+                content_type=content_type
+            )
+            user.user_permissions.add(permission)
+
         return HttpResponseRedirect(reverse_lazy('index'))
 
 class AdminDelete(DeleteView,PermissionRequiredMixin):
@@ -72,3 +82,24 @@ class AdminDelete(DeleteView,PermissionRequiredMixin):
     success_url=reverse_lazy('admins')
     permission_required='admins.delete_admin'
     permission_denied_message='Acceso denegado. Usuario no autorizado'
+
+def list(request,pk):
+    imparts_subject=Imparts.objects.filter(subject=pk)
+    study_subject=Study.objects.filter(subject=pk)
+
+    imparts=[]
+    study=[]
+
+    for imsu in imparts_subject:
+        imparts.append(str(pk)+'_'+str(imsu.professor.id))
+    
+    for stsu in study_subject:
+        study.append(str(pk)+'_'+str(stsu.student.id))
+
+    context={
+        'pk':pk,
+        'imparts':zip(imparts_subject,imparts),
+        'study':zip(study_subject,study),
+    }
+
+    return render(request,'subject_admin.html',context)

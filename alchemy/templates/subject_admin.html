@@ -1,0 +1,76 @@
+<!-- This template of the HomePage is a child of MainTemplate -->
+{% extends "_main_template.html" %}
+
+<!-- Load static files -->
+{% load static %}
+
+<!-- Put title -->
+{%block title%}
+Profesores
+{% endblock %}
+
+<!-- Put content -->
+{% block content %}
+    <header>
+        <h1>Profesores</h1>
+    </header>
+    <table border="2">
+        <thead>
+            <tr>
+                <th>Nombre de usuario</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Correo electrónico</th>
+                {% if perms.imparts.delete_imparts %}
+                    <th>Eliminar profesor de la asignatura</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for imp,key in imparts %}
+            <tr>
+                <td>{{imp.professor.username}}</td>
+                <td>{{imp.professor.first_name}}</td>
+                <td>{{imp.professor.last_name}}</td>
+                <td>{{imp.professor.email}}</td>
+                {% if perms.imparts.delete_imparts %}                    
+                    <td><a href="{% url 'delete_imparts' key %}">Eliminar</a></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {%if perms.imparts.add_imparts%}
+        <a href={%url 'create_imparts' pk %}>Añadir profesor</a>
+    {%endif%}
+
+    <header>
+        <h1>Estudiantes</h1>
+    </header>
+    <table border="2">
+        <thead>
+            <tr>
+                <th>Nombre de usuario</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Correo electrónico</th>
+                {% if perms.study.delete_study %}
+                    <th>Eliminar estudiante de la asignatura</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for stu,key in study %}
+            <tr>
+                <td>{{stu.student.username}}</td>
+                <td>{{stu.student.first_name}}</td>
+                <td>{{stu.student.last_name}}</td>
+                <td>{{stu.student.email}}</td>
+                {% if perms.study.delete_study %}                    
+                    <td><a href="{% url 'delete_imparts' key %}">Eliminar</a></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

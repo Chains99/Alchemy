@@ -9,5 +9,3 @@ class UserUpdate(UpdateView):
     form_class=UserEditForm
     template_name='register_user.html'
     success_url=reverse_lazy('index')
-    permission_required='students.change_student'
-    permission_denied_message='Acceso denegado. Usuario no autorizado'
