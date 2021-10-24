@@ -84,22 +84,13 @@ class AdminDelete(DeleteView,PermissionRequiredMixin):
     permission_denied_message='Acceso denegado. Usuario no autorizado'
 
 def list(request,pk):
-    imparts_subject=Imparts.objects.filter(subject=pk)
-    study_subject=Study.objects.filter(subject=pk)
-
-    imparts=[]
-    study=[]
-
-    for imsu in imparts_subject:
-        imparts.append(str(pk)+'_'+str(imsu.professor.id))
-    
-    for stsu in study_subject:
-        study.append(str(pk)+'_'+str(stsu.student.id))
+    imparts=Imparts.objects.filter(subject=pk)
+    study=Study.objects.filter(subject=pk)
 
     context={
         'pk':pk,
-        'imparts':zip(imparts_subject,imparts),
-        'study':zip(study_subject,study),
+        'imparts':imparts,
+        'study':study
     }
 
     return render(request,'subject_admin.html',context)

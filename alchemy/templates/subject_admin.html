@@ -27,14 +27,14 @@ Profesores
             </tr>
         </thead>
         <tbody>
-            {% for imp,key in imparts %}
+            {% for imp in imparts %}
             <tr>
                 <td>{{imp.professor.username}}</td>
                 <td>{{imp.professor.first_name}}</td>
                 <td>{{imp.professor.last_name}}</td>
                 <td>{{imp.professor.email}}</td>
                 {% if perms.imparts.delete_imparts %}                    
-                    <td><a href="{% url 'delete_imparts' key %}">Eliminar</a></td>
+                    <td><a href="{% url 'delete_imparts' imp.id %}">Eliminar</a></td>
                 {% endif %}
             </tr>
             {% endfor %}
@@ -60,14 +60,14 @@ Profesores
             </tr>
         </thead>
         <tbody>
-            {% for stu,key in study %}
+            {% for stu in study %}
             <tr>
                 <td>{{stu.student.username}}</td>
                 <td>{{stu.student.first_name}}</td>
                 <td>{{stu.student.last_name}}</td>
                 <td>{{stu.student.email}}</td>
                 {% if perms.study.delete_study %}                    
-                    <td><a href="{% url 'delete_imparts' key %}">Eliminar</a></td>
+                    <td><a href="{% url 'delete_study' stu.id %}">Eliminar</a></td>
                 {% endif %}
             </tr>
             {% endfor %}

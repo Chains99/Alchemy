@@ -6,13 +6,14 @@
 
 <!-- Put title -->
 {%block title%}
-Eliminar usuario
+Eliminar estdudiar
 {% endblock %}
 
 <!-- Put content -->
 {% block content %}
     <form method="post"> {% csrf_token %}
-    <h1>Seguro desea eliminar al usuario {{object.username}}?</h1>
+    <h1>Seguro desea eliminar que el estudiante {{study.student.username}} cursa la asignatura {{study.subject.name}}?</h1>
     <button type="submit">Confirmar</button>
+    <a href={%url 'subject_admin' study.subject.id%}>Cancelar</a>
 </form>
 {% endblock %}

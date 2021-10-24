@@ -6,10 +6,13 @@
 
 <!-- Put title -->
 {%block title%}
-Crear asignatura
+Crear o editar elemento básico 
 {% endblock %}
 
 <!-- Put content -->
 {% block content %}
-   
+   <form method="post">  {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Registrar o Editar</button>
+    </form>
 {% endblock %}

@@ -9,12 +9,25 @@ from django.urls import reverse_lazy
 from apps.admins.models import Admin
 from apps.study.models import Study
 from django.http import HttpResponseForbidden
+from apps.professors.models import Professor
 
 class SubjectList(ListView,PermissionRequiredMixin):
     model=Subject
     template_name='subjects.html'
     permission_required='subjects.view_subject'
     permission_denied_message='Acceso denegado. Usuario no autorizado'
+
+    def get_context_data(self):
+        user=self.request.user.id
+        try:
+            Professor.objects.get(id=user)
+        except :
+            subjects=Subject.objects.all()
+            return {'subjects':subjects}
+        subjects=[]
+        for imparts in Imparts.objects.filter(professor=user):
+            subjects.append(imparts.subject)
+        return {'subjects':subjects}
 
 class SubjectCreate(CreateView,PermissionRequiredMixin):
     model=Subject

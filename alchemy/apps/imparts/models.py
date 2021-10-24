@@ -11,7 +11,3 @@ class Imparts(models.Model):
 
     class Meta:
         unique_together = (('professor','subject'),)
-
-    def my_delete(self,subject,professor):
-        with connection.cursor() as cursor:
-            cursor.execute("DELETE FROM IMPARTS_IMPARTS WHERE SUBJECT_ID=%s AND PROFESSOR_ID=%s",[subject,professor])

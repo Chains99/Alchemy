@@ -19,3 +19,16 @@ def enroll(request,pk):
         study.save()
         return redirect('subject_student',pk=pk)
     return render(request,'enroll.html',context)
+
+def delete_study(request,pk):
+    study=Study.objects.get(id=pk)
+    if request.method=='GET':
+        context={
+            'study':study
+        }
+    else:
+        study.delete()
+        subject=study.subject.id
+        return redirect('subject_admin',pk=subject)
+    return render(request,'delete_study.html',context)
+

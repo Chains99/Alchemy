@@ -1,0 +1,47 @@
+<!-- This template of the HomePage is a child of MainTemplate -->
+{% extends "_main_template.html" %}
+
+<!-- Load static files -->
+{% load static %}
+
+<!-- Put title -->
+{%block title%}
+Elementos básicos
+{% endblock %}
+
+<!-- Put content -->
+{% block content %}
+
+    <a href={%url 'create_basic_element' pk %}>Añadir elemento básico</a>
+
+    <header>
+        <h1>Elementos básicos</h1>
+    </header>
+    <table border="2">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Valor</th>
+                <th>Visible</th>
+                <th>Opción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for element in basic_elements %}
+            <tr>
+                <td>{{element.name}}</td>
+                <td>{{element.value}}</td>
+                <td>{{element.visible}}</td>            
+                <td>
+                {%if not element.visible%}
+                <a href={%url 'make_visible' element.id %}>Hacer visible</a>
+                <a href={%url 'edit_basic_element' element.id %}>Editar</a>
+                {%endif%}
+                <a href={%url 'delete_basic_element' element.id %}>Eliminar</a>
+                </td>     
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

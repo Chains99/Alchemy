@@ -6,22 +6,41 @@
 
 <!-- Put title -->
 {%block title%}
-Asignaturas
+{{subject.name}}
 {% endblock %}
 
 <!-- Put content -->
 {% block content %}
+
+    <a href={%url 'basic_elements' pk %}>Ver elementos básicos</a>
+
     <header>
-        <h1>Profes</h1>
+        <h1>Solicitudes</h1>
     </header>
-    <nav>
-        <ul>
-            {% for imparts in object_list %}
-                <li>
-                    <a href=>{{imparts.professor.name}}</a>
-                </li>
+    <table border="2">
+        <thead>
+            <tr>
+                <th>Resultado</th>
+                <th>Elemento 1</th>
+                <th>Elemento 2</th>
+                <th>Justificación</th>
+                <th>Opción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in requests %}
+            <tr>
+                <td>{{request.name}}</td>
+                <td>{{request.element1.name}}</td>
+                <td>{{request.element2.name}}</td>
+                <td>{{request.justification}}</td>               
+                <td>
+                <a href="">Aceptar</a>
+                <a href="">Rechazar</a>
+                </td>     
+            </tr>
             {% endfor %}
-        </ul>
-    </nav>
+        </tbody>
+    </table>
 
 {% endblock %}

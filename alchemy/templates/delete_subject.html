@@ -14,5 +14,6 @@ Estudiantes
     <form method="post"> {% csrf_token %}
     <h1>Seguro desea eliminar la asignatura {{object.name}}?</h1>
     <button type="submit">Confirmar</button>
+    <a href={%url 'subjects' %}>Cancelar</a>
 </form>
 {% endblock %}
