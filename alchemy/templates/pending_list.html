@@ -1,0 +1,41 @@
+<!-- This template of the HomePage is a child of MainTemplate -->
+{% extends "_main_template.html" %}
+
+<!-- Load static files -->
+{% load static %}
+
+<!-- Put title -->
+{%block title%}
+Elementos pendientes {{study.subject.name}}
+{% endblock %}
+
+<!-- Put content -->
+{% block content %}
+    <header>
+        <h1>Estos son tus elementos pendientes en la asignatura {{study.subject.name}}</h1>
+    </header>
+    <table border="2">
+        <thead>
+            <tr>
+                <th>Nombre del elemento</th>
+                <th>Valor</th>
+                <th>Elemento 1 usado</th>
+                <th>Elemento 2 usado</th>
+                <th>Justificación</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for element in non_basic_elements %}
+            <tr>
+                <td>{{element.name}}</td>
+                <td>{{element.value}}</td>
+                <td>{{element.element1.name}}</td>
+                <td>{{element.element2.name}}</td>
+                <td>{{element.justification}}</td>
+                <td><a href="{% url 'delete_non_basic_element' element.id %}">Eliminar</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

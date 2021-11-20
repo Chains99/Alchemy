@@ -6,13 +6,13 @@
 
 <!-- Put title -->
 {%block title%}
-Eliminar usuario
+Crear elemento no básico
 {% endblock %}
 
 <!-- Put content -->
 {% block content %}
-    <form method="post"> {% csrf_token %}
-    <h1>¿Seguro desea eliminar al usuario {{object.username}}?</h1>
-    <button type="submit">Confirmar</button>
-</form>
+    <form method="post">  {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Crear o Editar</button>
+    </form>
 {% endblock %}

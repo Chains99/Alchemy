@@ -12,7 +12,7 @@ Estudiantes
 <!-- Put content -->
 {% block content %}
     <form method="post"> {% csrf_token %}
-    <h1>Seguro desea eliminar la asignatura {{object.name}}?</h1>
+    <h1>¿Seguro desea eliminar la asignatura {{object.name}}?</h1>
     <button type="submit">Confirmar</button>
     <a href={%url 'subjects' %}>Cancelar</a>
 </form>

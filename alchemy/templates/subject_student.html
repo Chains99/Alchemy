@@ -6,22 +6,24 @@
 
 <!-- Put title -->
 {%block title%}
-Asignaturas
+{{study.subject.name}} - {{study.student.username}}
 {% endblock %}
 
 <!-- Put content -->
 {% block content %}
-    <header>
-        <h1>Alumnos</h1>
-    </header>
-    <nav>
-        <ul>
-            {% for study in object_list %}
-                <li>
-                    <a href=>{{study.student.name}}</a>
-                </li>
-            {% endfor %}
-        </ul>
-    </nav>
+
+<h1>Bienvenido {{study.student.first_name}} a la asignatura {{study.subject.name}}</h1>
+
+<h2>Total de créditos obtenidos en todas las asignaturas: {{study.student.credits}}</h2>
+
+<h2>Créditos obtenidos en esta asignatura: {{study.credits}}</h2>
+
+<a href="{% url 'create_non_basic_element' study.subject.id %}">Crear elemento nuevo</a>
+
+<a href="{% url 'basic_elements' study.subject.id %}">Elementos básicos</a>
+
+<a href="{% url 'accepted_list' study.subject.id %}">Elementos aceptados</a>
+
+<a href="{% url 'pending_list' study.subject.id %}">Elementos pendientes</a>
 
 {% endblock %}

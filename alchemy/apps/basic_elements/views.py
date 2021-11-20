@@ -2,11 +2,9 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls.base import reverse_lazy
-from django.views.generic import CreateView,DeleteView,UpdateView
+from django.views.generic import CreateView,UpdateView
 from datetime import datetime
 from apps.imparts.models import Imparts
-from apps.professors.models import Professor
-from apps.subjects.models import Subject
 from .models import BasicElement
 from .forms import BasicElementCreateForm
 
@@ -18,7 +16,7 @@ class BasicElementCreate(CreateView,PermissionRequiredMixin):
     model=BasicElement
     form_class=BasicElementCreateForm
     template_name='create_basic_element.html'
-    permission_required='basic_elements.add_basic_element'
+    permission_required='basic_elements.addbasicelement'
     permission_denied_message='Acceso denegado. Usuario no autorizado'
 
     def form_valid(self,form):
@@ -33,7 +31,7 @@ def make_visible(request,pk):
     basic_element=BasicElement.objects.get(id=pk)
     basic_element.visible=True
     basic_element.save()
-    subject=basic_element.imparts.subjec.id
+    subject=basic_element.imparts.subject.id
     return redirect('basic_elements',subject)
 
 class BasicElementEdit(UpdateView,PermissionRequiredMixin):

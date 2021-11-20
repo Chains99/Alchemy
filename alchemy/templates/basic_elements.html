@@ -12,33 +12,39 @@ Elementos básicos
 <!-- Put content -->
 {% block content %}
 
+    {%if perms.basic_elements.add_basicelement%}
     <a href={%url 'create_basic_element' pk %}>Añadir elemento básico</a>
-
+    {%endif%}
+    
     <header>
-        <h1>Elementos básicos</h1>
+        <h1>Elementos básicos de la asignatura</h1>
     </header>
     <table border="2">
         <thead>
             <tr>
                 <th>Nombre</th>
                 <th>Valor</th>
+                {%if perms.basic_elements.change_basicelement%}
                 <th>Visible</th>
                 <th>Opción</th>
+                {%endif%}
             </tr>
         </thead>
         <tbody>
             {% for element in basic_elements %}
             <tr>
                 <td>{{element.name}}</td>
-                <td>{{element.value}}</td>
-                <td>{{element.visible}}</td>            
+                <td>{{element.value}}</td>          
+                {%if perms.basic_elements.change_basicelement%}
+                <td>{{element.visible}}</td> 
                 <td>
                 {%if not element.visible%}
                 <a href={%url 'make_visible' element.id %}>Hacer visible</a>
                 <a href={%url 'edit_basic_element' element.id %}>Editar</a>
-                {%endif%}
                 <a href={%url 'delete_basic_element' element.id %}>Eliminar</a>
-                </td>     
+                {%endif%}
+                </td>
+                {%endif%}     
             </tr>
             {% endfor %}
         </tbody>

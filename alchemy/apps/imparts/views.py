@@ -32,15 +32,17 @@ def delete_imparts(request,pk):
             'imparts':imparts
         }
     else:
-        imparts.delete()
+        imparts.professor=None
+        imparts.save()
         subject=imparts.subject.id
         return redirect('subject_admin',pk=subject)
     return render(request,'delete_imparts.html',context)
 
 def request_list(request,pk):
+    imparts=Imparts.objects.get(subject=pk,professor=request.user.id)
     requests=NonBasicElement.objects.filter(accepted=False,study__subject=pk)
     context={
         'requests' : requests,
-        'pk' : pk
+        'imparts': imparts
     }
     return render(request,'subject_professor.html',context)

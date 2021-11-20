@@ -6,13 +6,13 @@
 
 <!-- Put title -->
 {%block title%}
-{{subject.name}}
+{{imparts.subject.name}} - {{imparts.professor.username}}
 {% endblock %}
 
 <!-- Put content -->
 {% block content %}
 
-    <a href={%url 'basic_elements' pk %}>Ver elementos básicos</a>
+    <a href={%url 'basic_elements' imparts.subject.id %}>Ver elementos básicos</a>
 
     <header>
         <h1>Solicitudes</h1>
@@ -35,8 +35,8 @@
                 <td>{{request.element2.name}}</td>
                 <td>{{request.justification}}</td>               
                 <td>
-                <a href="">Aceptar</a>
-                <a href="">Rechazar</a>
+                <a href="{%url 'accept_element' request.id %}">Aceptar</a>
+                <a href="{%url 'reject_element' request.id %}">Rechazar</a>
                 </td>     
             </tr>
             {% endfor %}

@@ -25,6 +25,7 @@ from apps.users.views import UserUpdate
 from apps.imparts.views import create_imparts,delete_imparts,request_list
 from apps.study.views import subject_student,enroll,delete_study
 from apps.basic_elements.views import BasicElementCreate,basic_element_list,make_visible,BasicElementEdit,delete_basic_element
+from apps.non_basic_elements.views import accepted_list, create_non_basic_element,pending_list,delete_non_basic_element,accept_non_basic_element,reject_non_basic_element
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -52,10 +53,16 @@ urlpatterns = [
     path('subjects/subject_admin/delete_study/<int:pk>',delete_study,name='delete_study'),
     path('subjects/subject_student/<int:pk>',subject_student,name='subject_student'),
     path('subjects/subject_student/enroll/<int:pk>',enroll,name='enroll'),
-    path('subject/aubject_professor/<int:pk>',request_list,name='subject_professor'),
+    path('subject/subject_professor/<int:pk>',request_list,name='subject_professor'),
     path('subject/subject_professor/basic_elements/<int:pk>',basic_element_list,name='basic_elements'),
     path('subjects/subject_professor/basic_elements/create_basic_element/<int:pk>',BasicElementCreate.as_view(),name='create_basic_element'),
     path('subjects/subject_professor/basic_elements/make_visible/<int:pk>',make_visible,name='make_visible'),
     path('subjects/subject_professor/basic_elements/edit_basic_element/<int:pk>',BasicElementEdit.as_view(),name='edit_basic_element'),
-    path('subjects/subject_professor/basic_element/delete_basic_element/<int:pk>',delete_basic_element,name='delete_basic_element')
+    path('subjects/subject_professor/basic_element/delete_basic_element/<int:pk>',delete_basic_element,name='delete_basic_element'),
+    path('subjects/subject_student/accepted_list/<int:pk>',accepted_list,name='accepted_list'),
+    path('subjects/subject_student/pending_list/<int:pk>',pending_list,name='pending_list'),
+    path('subjects/subject_student/create_non_basic_element/<int:pk>',create_non_basic_element,name='create_non_basic_element'),
+    path('subjects/subject_student/pending_list/delete_element/<int:pk>',delete_non_basic_element,name='delete_non_basic_element'),
+    path('subjects/subject_professor/accept_element/<int:pk>',accept_non_basic_element,name="accept_element"),
+    path('subjects/subject_professor/reject_element/<int:pk>',reject_non_basic_element,name="reject_element")
 ]
