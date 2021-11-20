@@ -1,0 +1,60 @@
+<div class="bg-alchemy">
+    <header class="ftco-section">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light rounded mb-1">
+                    <div class="container-fluid">
+                        <h3><a id="brand" href="{% url 'index' %}">Sitio de la Alquimia!</a></h3>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="nav navbar-nav ml-auto">
+                                <li class="nav-item active" id="index" >                    
+                                    <a class="nav-link" href="{% url 'index' %}">Inicio</a>
+                                </li>
+                                {%if perms.subjects.view_subject%}
+                                <li class="nav-item" id="subjects" >
+                                    <a class="nav-link" href="{% url 'subjects' %}">Asignaturas</a>
+                                </li>
+                                {%endif%}
+                               {% if perms.admins.view_admin %}
+                                <li class="btn-group nav-item" id="view_users">
+                                    <button type="button" class="btn btn-link nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Ver usuarios
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        {% if perms.admins.view_admin %}
+                                                <a class="nav-link dropdown-item" href="{% url 'admins' %}">Administradores</a>
+                                        {% endif %}
+                                        {% if perms.professors.view_professor %}
+                                                <a class="nav-link dropdown-item" href="{% url 'professors' %}">Profesores</a>
+                                        {% endif %}
+                                        {% if perms.students.view_student %}
+                                                <a class="nav-link dropdown-item" href="{% url 'students' %}">Estudiantes</a>
+                                        {% endif %}
+                                    </div>
+                                </li>
+                                {% endif %}
+
+                                <li class="nav-item" id="consultas" >
+                                    <a class="nav-link" href="{% url 'queries' %}">Consultas</a>
+                                </li>
+                                {% if user.is_authenticated %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'edit_user' user.id %}">Editar perfil</a>               
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a>               
+                                    </li>
+                                {% else %}
+                                    <li class="nav-item">
+                                        <a class="nav-link  text-white" href="{% url 'login' %}">Iniciar sesión</a>
+                                    </li>
+                                    <li class="nav-item" >
+                                        <a class="nav-link text-white" href="{% url 'register_student' %}">Crear cuenta</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+            </nav>
+        </div>
+    </header>
+</div>

@@ -1,0 +1,19 @@
+<!-- This template of the HomePage is a child of MainTemplate -->
+{% extends "_main_template.html" %}
+
+<!-- Load static files -->
+{% load static %}
+
+<!-- Put title -->
+{%block title%}
+Eliminar elemento básico
+{% endblock %}
+
+<!-- Put content -->
+{% block content %}
+    <form method="post"> {% csrf_token %}
+    <h1>Seguro desea eliminar el elemento básico {{basic_element.name}}?</h1>
+    <button type="submit">Confirmar</button>
+    <a href={%url 'subjects' %}>Cancelar</a>
+</form>
+{% endblock %}

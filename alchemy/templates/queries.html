@@ -1,0 +1,109 @@
+<!-- Load static files -->
+{% load static %}
+
+<!-- Put title -->
+{%block title%}
+<h2 class="title text-center"> Consultas Disponibles </h2>
+{% endblock %}
+
+<h2 class="title text-center"> Estudiantes con mas creditos </h2>
+<form action="{% url 'queries_result' %}" method="post">{% csrf_token %}
+    <label for="numeroEstudiante">Numero de Estudiantes: </label>
+    <input type="number" name="n_students_credits" min=1 value="10">    
+    <input type="submit" value="Consultar">
+    <input type="hidden" name="form-type" value="moreCredits"/>
+</form>
+
+
+<h2 class="title text-center"> Estudiantes con mas elementos creados </h2>
+<form action="{% url 'queries_result' %}" method="post">{% csrf_token %}
+    <label for="numeroEstudiante1">Numero de Estudiantes: </label>
+    <input type="number" name="n_students_elemCreated" min=1 value="10">
+    <input type="submit" value="Consultar">
+    <input type="hidden" name="form-type" value="moreElemCreated"/>
+</form>
+
+<h2 class="title text-center"> Elementos mas utilizados para realizar mezclas </h2>
+<form action="{% url 'queries_result' %}" method="post"> {%csrf_token%}
+    <label for="numeroElem1">Numero de Elementos: </label>
+    <input type="number" name="n_elements_basic" min=1 value="10">
+    <input type="text" name="subject_name">
+    <input type="submit" value="Consultar">
+    <input type="hidden" name="form-type" value="moreBasicElemUsed" />
+</form>
+
+
+<h2 class="title text-center"> Elementos mas valiosos de los elementos no basicos </h2>
+<form action="{% url 'queries_result' %}" method="post"> {%csrf_token%}
+    <label for="numeroElem2">Numero de Elementos: </label>
+    <input type="number" name="n_elements_noBasic" min=1 value="10">
+    <input type="text" name="subject_name">
+    <input type="submit" value="Consultar">
+    <input type="hidden" name="form-type" value="moreValNoBasicElem" />
+</form>
+
+<h2 class="title text-center"> Elementos mas valiosos de los elementos basicos </h2>
+<form action="{% url 'queries_result' %}" method="post"> {%csrf_token%}
+    <label for="numeroElem3">Numero de Elementos: </label>
+    <input type="number" name="n_elements_valbasic" min=1 value="10">
+    <input type="text" name="subject_name">
+    <input type="submit" value="Consultar">
+    <input type="hidden" name="form-type" value="moreValBasicElem" />
+</form>
+
+<h2 class="title text-center"> Elementos creados en el dia </h2>
+<form action="{% url 'queries_result' %}" method="post">{% csrf_token %}
+    <label for="day">Dia: </label>
+    <input type="number" name="day" min=1 max=31 value="1">
+    <input type="submit" value="Consultar">
+    <input type="hidden" name="form-type" value="elemCreatedDay" />
+</form>
+
+<h2 class="title text-center"> Elementos creados en el mes </h2>
+<form action="{% url 'queries_result' %}" method="post">{% csrf_token %}
+    <label for="team_name">Mes: </label>
+    <input type="number" name="month" min=1 max=12 value="1">
+    <input type="submit" value="Consultar">
+    <input type="hidden" name="form-type" value="elemCreatedMonth" />
+</form>
+
+<h2 class="title text-center"> Elementos creados en el año </h2>
+<form action="{% url 'queries_result' %}" method="post">{% csrf_token %}
+    <label for="year">Año: </label>
+    <input type="number" name="year" min=2000 value=2021>
+    <input type="submit" value="Consultar">
+    <input type="hidden" name="form-type" value="elemCreatedYear" />
+</form>
+
+<h2 class="title text-center"> Elementos creados en el intervalo de fechas </h2>
+<form action="{% url 'queries_result' %}" method="post">{% csrf_token %}
+    <label for="intervalDates">Fecha Inicial: </label>
+    <input type="date" name="initial_date">
+    <label for="intervalDates1">Fecha Final : </label>
+    <input type="date" name="final_date">
+    <input type="submit" value="Consultar">
+    <input type="hidden" name="form-type" value="elemCreatedDates" />
+</form>
+
+<h2 class="title text-center"> Estudiantes con mas creditos acumulados en una asignatura</h2>
+<form action="{% url 'queries_result' %}" method="post">{% csrf_token %}
+    <label for="numeroEstudiante2">Numero de estudiantes: </label>
+    <input type="number" name="n_students_subCredits" min=1 value="10">
+    <input type="text" name="subject_name">
+    <input type="submit" value="Consultar">
+    <input type="hidden" name="form-type" value="subjStudentsCredits" />
+</form>
+
+<h2 class="title text-center"> Estudiante con mas creditos acumulados por cada asignatura</h2>
+<form action="{% url 'queries_result' %}" method="get">
+    <label for="mejorEstudiante"> Mejor estudiante por asignatura: </label>
+    <input type="submit" value="Consultar">
+</form>
+
+<h2 class="title text-center"> Elementos no aceptados</h2>
+<form action="{% url 'queries_result' %}" method="post">{% csrf_token %}
+    <label for="nombreAsig">Asignatura: </label>
+    <input type="text" name="subject_name">
+    <input type="submit" value="Consultar">
+    <input type="hidden" name="form-type" value="noAcceptedElem" />
+</form>

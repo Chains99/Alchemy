@@ -1,0 +1,46 @@
+<!-- This template of the HomePage is a child of MainTemplate -->
+{% extends "_main_template.html" %}
+
+<!-- Load static files -->
+{% load static %}
+
+<!-- Put title -->
+{%block title%}
+Profesores
+{% endblock %}
+
+<!-- Put content -->
+{% block content %}
+    <header>
+        <h1>Profesores</h1>
+    </header>
+    <table border="2">
+        <thead>
+            <tr>
+                <th>Nombre de usuario</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Correo electrónico</th>
+                {% if perms.professors.delete_professor %}
+                    <th>Eliminar profesor</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for professor in object_list %}
+            <tr>
+                <td>{{professor.username}}</td>
+                <td>{{professor.first_name}}</td>
+                <td>{{professor.last_name}}</td>
+                <td>{{professor.email}}</td>
+                {% if perms.professors.delete_professor %}                    
+                    <td><a href="{% url 'delete_professor' professor.id %}">Eliminar</a></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {%if perms.professors.add_professor%}
+        <a href={%url 'register_professor'%}>Registrar nuevo profesor</a>
+    {%endif%}
+{% endblock %}

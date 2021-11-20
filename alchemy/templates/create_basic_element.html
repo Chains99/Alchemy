@@ -1,0 +1,18 @@
+<!-- This template of the HomePage is a child of MainTemplate -->
+{% extends "_main_template.html" %}
+
+<!-- Load static files -->
+{% load static %}
+
+<!-- Put title -->
+{%block title%}
+Crear o editar elemento básico 
+{% endblock %}
+
+<!-- Put content -->
+{% block content %}
+   <form method="post">  {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Registrar o Editar</button>
+    </form>
+{% endblock %}

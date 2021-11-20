@@ -1,0 +1,264 @@
+{%block title%}
+<h1>Respuesta de la Consulta</h1>
+{%endblock%}
+
+<html>
+    <body>
+        {%if moreCredits%}
+        <h2 class="title text-center"> Estudiantes con mas creditos </h2>
+        <table border="2">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Email</th>
+                    <th>Total de Creditos</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for student in moreCredits%}
+                <tr>
+                    <td>{{student.first_name}}</td>
+                    <td>{{student.last_name}}</td>
+                    <td>{{student.email}}</td>
+                    <td>{{student.credits}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+        {% endif %}
+    </body>
+
+    <body>
+        {%if moreElemCreated%}
+        <h2 class="title text-center"> Estudiantes con mas elementos creados </h2>
+        <table border="2">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Cant de Elems</th>
+                    <th>Total de creditos</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for student in moreElemCreated%}
+                <tr>
+                    <td>{{student.firstname}}</td>
+                    <td>{{student.lastname}}</td>
+                    <td>{{student.count_elem}}</td>
+                    <td>{{student.credits}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+        {% endif %}
+    </body>
+
+    <body>
+        {%if moreBasicElemUsed%}
+        <h2 class="title text-center"> Elementos mas utilizados para realizar mezclas </h2>
+        <table border="2">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Cantidad</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for elem in moreBasicElemUsed%}
+                <tr>
+                    <td>{{elem.name}}</td>
+                    <td>{{elem.cant_elem1}}</td>
+                    <td>{{elem.value}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+        {% endif %}
+    </body>
+
+    <body>
+        {%if moreValNoBasicElem%}
+        <h2 class="title text-center"> Elementos mas utilizados para realizar mezclas </h2>
+        <table border="2">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for elem in moreValNoBasicElem%}
+                <tr>
+                    <td>{{elem.name}}</td>
+                    <td>{{elem.value}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+        {% endif %}
+    </body>
+
+
+    <body>
+        {%if elemCreatedDay%}
+        <h2 class="title text-center"> Elementos creados en el dia </h2>
+        <table border="2">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Fecha de creacion</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for elem in elemCreatedDay%}
+                <tr>
+                    <td>{{elem.name}}</td>
+                    <td>{{elem.date_time_creation}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+        {% endif %}
+    </body>
+
+    <body>
+        {%if elemCreatedMonth%}
+        <h2 class="title text-center"> Elementos creados en el mes </h2>
+        <table border="2">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Fecha de creacion</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for elem in elemCreatedMonth%}
+                <tr>
+                    <td>{{elem.name}}</td>
+                    <td>{{elem.date_time_creation}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+        {% endif %}
+    </body>
+
+    <body>
+        {%if elemCreatedYear%}
+        <h2 class="title text-center"> Elementos creados en el año </h2>
+        <table border="2">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Fecha de creacion</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for elem in elemCreatedYear%}
+                <tr>
+                    <td>{{elem.name}}</td>
+                    <td>{{elem.date_time_creation}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+        {% endif %}
+    </body>
+
+    <body>
+        {%if elemCreatedDates%}
+        <h2 class="title text-center"> Elementos creados en el año </h2>
+        <table border="2">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Fecha de creacion</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for elem in elemCreatedDates%}
+                <tr>
+                    <td>{{elem.name}}</td>
+                    <td>{{elem.date_time_creation}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+        {% endif %}
+    </body>
+    
+    <body>
+        {%if subjStudentsCredits%}
+        <h2 class="title text-center"> Estudiantes con mas elementos creados </h2>
+        <table border="2">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Creditos</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for student in subjStudentsCredits%}
+                <tr>
+                    <td>{{student.firstname}}</td>
+                    <td>{{student.lastname}}</td>
+                    <td>{{student.credits}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+        {% endif %}
+    </body>
+
+    <body>
+        {%if bestStudentBySubj%}
+        <h2 class="title text-center"> Mejor estudiante por asignatura </h2>
+        <table border="2">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Creditos</th>
+                    <th>Asignatura</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for student in bestStudentBySubj%}
+                <tr>
+                    <td>{{student.firstname}}</td>
+                    <td>{{student.lastname}}</td>
+                    <td>{{student.credits}}</td>
+                    <td>{{student.subject}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+        {% endif %}
+    </body>
+
+    <body>
+        {%if noAcceptedElem%}
+        <h2 class="title text-center"> Elementos no aceptados </h2>
+        <table border="2">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Asignatura</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for elem in noAcceptedElem%}
+                <tr>
+                    <td>{{elem.name}}</td>
+                    <td>{{elem.student}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+        {% endif %}
+    </body>
+</html>
