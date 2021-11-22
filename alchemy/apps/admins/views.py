@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import permission_required
 from django.shortcuts import render
 from .forms import AdminRegisterForm
 from django.views.generic import CreateView,ListView,DeleteView
@@ -14,13 +15,13 @@ from apps.students.models import Student
 from apps.study.models import Study
 
 
-class AdminList(ListView,PermissionRequiredMixin):
+class AdminList(PermissionRequiredMixin,ListView):
     model=Admin
     template_name='admins.html'
     permission_required='admins.view_admin'
     permission_denied_message='Acceso denegado. Usuario no autorizado'
 
-class AdminCreate(CreateView,PermissionRequiredMixin):
+class AdminCreate(PermissionRequiredMixin,CreateView):
     form_class=AdminRegisterForm
     template_name='register_user.html'
     permission_required='admins.add_admin'
@@ -76,13 +77,14 @@ class AdminCreate(CreateView,PermissionRequiredMixin):
 
         return HttpResponseRedirect(reverse_lazy('index'))
 
-class AdminDelete(DeleteView,PermissionRequiredMixin):
+class AdminDelete(PermissionRequiredMixin,DeleteView):
     model=Admin
     template_name='delete_user.html'
     success_url=reverse_lazy('admins')
     permission_required='admins.delete_admin'
     permission_denied_message='Acceso denegado. Usuario no autorizado'
 
+@permission_required('admins.change_admin')
 def list(request,pk):
     imparts=Imparts.objects.filter(subject=pk).exclude(professor__isnull=True)
     study=Study.objects.filter(subject=pk)

@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.http.response import HttpResponseRedirect
 from apps.subjects.models import Subject
@@ -6,6 +7,7 @@ from .models import Imparts
 from .forms import ImpartsCreateForm
 from apps.non_basic_elements.models import NonBasicElement
 
+@permission_required('imparts.add_imparts')
 def create_imparts(request,pk):  
     if request.method=='GET':
         form=ImpartsCreateForm()
@@ -25,6 +27,7 @@ def create_imparts(request,pk):
             return redirect('subject_admin',pk=pk)
     return render(request,'create_imparts.html',context)
 
+@permission_required('imparts.delete_imparts')
 def delete_imparts(request,pk):
     imparts=Imparts.objects.get(id=pk)
     if request.method=='GET':
@@ -38,6 +41,7 @@ def delete_imparts(request,pk):
         return redirect('subject_admin',pk=subject)
     return render(request,'delete_imparts.html',context)
 
+@permission_required('basic_elements.add_basicelement')
 def request_list(request,pk):
     imparts=Imparts.objects.get(subject=pk,professor=request.user.id)
     requests=NonBasicElement.objects.filter(accepted=False,study__subject=pk)

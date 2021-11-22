@@ -1,3 +1,4 @@
+from apps.basic_elements.models import BasicElement
 from .forms import StudentRegisterForm
 from django.views.generic import CreateView,DeleteView,ListView
 from django.urls import reverse_lazy
@@ -9,7 +10,7 @@ from .models import Student
 from apps.non_basic_elements.models import NonBasicElement
 from apps.subjects.models import Subject
 
-class StudentList(ListView,PermissionRequiredMixin):
+class StudentList(PermissionRequiredMixin,ListView):
     model=Student
     template_name='students.html'
     permission_required='students.view_student'
@@ -22,6 +23,8 @@ class StudentCreate(CreateView):
 
     def form_valid(self,form):
         user=form.save()
+
+        permissions=['add','view','change','delete']
 
         content_type=ContentType.objects.get_for_model(Student)
         permission=Permission.objects.get(
@@ -37,16 +40,24 @@ class StudentCreate(CreateView):
             )
         user.user_permissions.add(permission)
 
-        content_type=ContentType.objects.get_for_model(NonBasicElement)
+        for perm in permissions:
+            content_type=ContentType.objects.get_for_model(NonBasicElement)
+            permission=Permission.objects.get(
+                codename=perm+'_'+'nonbasicelement',
+                content_type=content_type
+            )
+            user.user_permissions.add(permission)
+
+        content_type=ContentType.objects.get_for_model(BasicElement)
         permission=Permission.objects.get(
-            codename='add_nonbasicelement',
+            codename='view_basicelement',
             content_type=content_type
             )
         user.user_permissions.add(permission)
 
         return HttpResponseRedirect(reverse_lazy('index'))
 
-class StudentDelete(DeleteView,PermissionRequiredMixin):
+class StudentDelete(PermissionRequiredMixin,DeleteView):
     model=Student
     template_name='delete_user.html'
     success_url=reverse_lazy('students')

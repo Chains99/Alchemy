@@ -6,12 +6,15 @@ from django import forms
 from .models import NonBasicElement
 from apps.basic_elements.models import BasicElement
 from apps.elements.models import Element
+from django.contrib.auth.decorators import permission_required
 
+@permission_required('non_basic_elements.view_nonbasicelement')
 def accepted_list(request,pk):
     study=Study.objects.get(subject=pk,student=request.user.id)
     non_basic_elements=NonBasicElement.objects.filter(study=study.id).filter(accepted=True)
     return render(request,'accepted_list.html',{'study':study,'non_basic_elements':non_basic_elements})
 
+@permission_required('non_basic_elements.view_nonbasicelement')
 def pending_list(request,pk):
     study=Study.objects.get(subject=pk,student=request.user.id)
     non_basic_elements=NonBasicElement.objects.filter(study=study.id).filter(accepted=False)
@@ -23,11 +26,12 @@ def create_form(request, choices):
         name=forms.CharField(max_length=100,label='Nombre')
         element1=forms.ChoiceField(choices=choices,label='Elemento 1')
         element2=forms.ChoiceField(choices=choices,label='Elemento 2')
-        justification=forms.CharField(max_length=1000,label='Justificación')
+        justification=forms.CharField(widget=forms.Textarea,max_length=1000,label='Justificación')
 
     form=NonBasicElementCreateForm() if request.method=='GET' else NonBasicElementCreateForm(request.POST)
     return form
 
+@permission_required('non_basic_elements.add_nonbasicelement')
 def create_non_basic_element(request,pk):
     study=Study.objects.get(student=request.user.id,subject=pk)
     non_basic_elements=NonBasicElement.objects.filter(study=study,accepted=True)
@@ -64,6 +68,7 @@ def create_non_basic_element(request,pk):
 
     return render(request,'create_non_basic_element.html',contexto)
 
+@permission_required('non_basic_elements.delete_nonbasicelement')
 def delete_non_basic_element(request,pk):
     non_basic_element=NonBasicElement.objects.get(id=pk)
     if request.method=='GET':
@@ -76,6 +81,7 @@ def delete_non_basic_element(request,pk):
         return redirect('pending_list',pk=subject)
     return render(request,'delete_non_basic_element.html',context)
 
+@permission_required('basic_elements.add_basicelement')
 def reject_non_basic_element(request,pk):
     non_basic_element=NonBasicElement.objects.get(id=pk)
     if request.method=='GET':
@@ -88,6 +94,7 @@ def reject_non_basic_element(request,pk):
         return redirect('subject_professor',pk=subject)
     return render(request,'reject_element.html',context)
 
+@permission_required('basic_elements.add_basicelement')
 def accept_non_basic_element(request,pk):
     non_basic_element=NonBasicElement.objects.get(id=pk)
     if request.method=='GET':

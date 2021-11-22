@@ -11,7 +11,7 @@ from apps.study.models import Study
 from django.http import HttpResponseForbidden
 from apps.professors.models import Professor
 
-class SubjectList(ListView,PermissionRequiredMixin):
+class SubjectList(PermissionRequiredMixin,ListView):
     model=Subject
     template_name='subjects.html'
     permission_required='subjects.view_subject'
@@ -29,7 +29,7 @@ class SubjectList(ListView,PermissionRequiredMixin):
             subjects.append(imparts.subject)
         return {'subjects':subjects}
 
-class SubjectCreate(CreateView,PermissionRequiredMixin):
+class SubjectCreate(PermissionRequiredMixin,CreateView):
     model=Subject
     form_class=SubjectCreateForm
     template_name='create_subject.html'
@@ -37,7 +37,7 @@ class SubjectCreate(CreateView,PermissionRequiredMixin):
     permission_required='subjects.add_subject'
     permission_denied_message='Acceso denegado. Usuario no autorizado'
 
-class SubjectUpdate(UpdateView,PermissionRequiredMixin):
+class SubjectUpdate(PermissionRequiredMixin,UpdateView):
     model=Subject
     form_class=SubjectCreateForm
     template_name='create_subject.html'
@@ -53,6 +53,8 @@ class SubjectDelete(PermissionRequiredMixin,DeleteView):
     permission_denied_message='Acceso denegado. Usuario no autorizado'
 
 def professor_or_student_or_admin(request,pk):
+    if(request.user.is_superuser):
+        return redirect('subject_admin',pk)
     try:
         Admin.objects.get(id=request.user.id)
     except:

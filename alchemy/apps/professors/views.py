@@ -10,13 +10,13 @@ from .models import Professor
 from apps.basic_elements.models import BasicElement
 from apps.subjects.models import Subject
 
-class ProfessorList(ListView,PermissionRequiredMixin):
+class ProfessorList(PermissionRequiredMixin,ListView):
     model=Professor
     template_name='professors.html'
     permission_required='professors.view_professor'
     permission_denied_message='Acceso denegado. Usuario no autorizado'
 
-class ProfessorCreate(CreateView,PermissionRequiredMixin):
+class ProfessorCreate(PermissionRequiredMixin,CreateView):
     form_class=ProfessorRegisterForm
     template_name='register_user.html'
     permission_required='professors.add_professor'
@@ -58,7 +58,7 @@ class ProfessorCreate(CreateView,PermissionRequiredMixin):
 
         return HttpResponseRedirect(reverse_lazy('professors'))
 
-class ProfessorDelete(DeleteView,PermissionRequiredMixin):
+class ProfessorDelete(PermissionRequiredMixin,DeleteView):
     model=Professor
     template_name='delete_user.html'
     success_url=reverse_lazy('professors')
