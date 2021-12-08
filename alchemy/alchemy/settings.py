@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'apps.imparts',
     'apps.study',
     'apps.basic_elements',
-    'apps.non_basic_elements'
+    'apps.non_basic_elements',
+    'apps.queries'
 ]
 
 MIDDLEWARE = [

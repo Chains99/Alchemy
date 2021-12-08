@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+from apps.study.models import Study
+
+admin.site.register(Study)

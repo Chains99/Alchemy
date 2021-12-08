@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+from apps.basic_elements.models import BasicElement
+
+admin.site.register(BasicElement)

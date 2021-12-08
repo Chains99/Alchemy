@@ -26,6 +26,7 @@ from apps.imparts.views import create_imparts,delete_imparts,request_list
 from apps.study.views import subject_student,enroll,delete_study
 from apps.basic_elements.views import BasicElementCreate,basic_element_list,make_visible,BasicElementEdit,delete_basic_element
 from apps.non_basic_elements.views import accepted_list, create_non_basic_element,pending_list,delete_non_basic_element,accept_non_basic_element,reject_non_basic_element
+from apps.queries.views import queries_render, queries_result_render
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -65,4 +66,6 @@ urlpatterns = [
     path('subjects/subject_student/pending_list/delete_element/<int:pk>',delete_non_basic_element,name='delete_non_basic_element'),
     path('subjects/subject_professor/accept_element/<int:pk>',accept_non_basic_element,name="accept_element"),
     path('subjects/subject_professor/reject_element/<int:pk>',reject_non_basic_element,name="reject_element")
+    path('queries/', queries_render, name='queries'),
+    path('queries_result/', queries_result_render, name='queries_result')
 ]

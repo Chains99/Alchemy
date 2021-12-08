@@ -8,3 +8,6 @@ class NonBasicElement(Element):
     justification=models.CharField(max_length=1000)
     accepted=models.BooleanField(default=False)
     study=models.ForeignKey(Study,models.CASCADE,related_name='nonBasicElement_study')
+
+    def __str__(self) -> str:
+        return self.name

@@ -5,3 +5,6 @@ class Element(models.Model):
     name=models.CharField(max_length=150)
     value=models.IntegerField()
     date_time_creation=models.DateTimeField()
+
+    def __str__(self) -> str:
+        return self.name
