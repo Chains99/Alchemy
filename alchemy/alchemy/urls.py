@@ -65,7 +65,7 @@ urlpatterns = [
     path('subjects/subject_student/create_non_basic_element/<int:pk>',create_non_basic_element,name='create_non_basic_element'),
     path('subjects/subject_student/pending_list/delete_element/<int:pk>',delete_non_basic_element,name='delete_non_basic_element'),
     path('subjects/subject_professor/accept_element/<int:pk>',accept_non_basic_element,name="accept_element"),
-    path('subjects/subject_professor/reject_element/<int:pk>',reject_non_basic_element,name="reject_element")
+    path('subjects/subject_professor/reject_element/<int:pk>',reject_non_basic_element,name="reject_element"),
     path('queries/', queries_render, name='queries'),
     path('queries_result/', queries_result_render, name='queries_result')
 ]
