@@ -6,14 +6,17 @@
 
 <!-- Put title -->
 {%block title%}
-Profesores
+{{subject.name}}
 {% endblock %}
 
 <!-- Put content -->
 {% block content %}
     <header>
-        <h1>Profesores</h1>
+        <h1>{{subject.name}}</h1>
     </header>
+    
+    <h1>Profesores</h1>
+
     <table border="2">
         <thead>
             <tr>
@@ -41,12 +44,11 @@ Profesores
         </tbody>
     </table>
     {%if perms.imparts.add_imparts%}
-        <a href={%url 'create_imparts' pk %}>Añadir profesor</a>
+        <a href={%url 'create_imparts' subject.id %}>Añadir profesor</a>
     {%endif%}
 
-    <header>
-        <h1>Estudiantes</h1>
-    </header>
+    <h1>Estudiantes</h1>
+
     <table border="2">
         <thead>
             <tr>

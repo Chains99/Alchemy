@@ -18,7 +18,7 @@ class BasicElementCreate(PermissionRequiredMixin,CreateView):
     model=BasicElement
     form_class=BasicElementCreateForm
     template_name='create_basic_element.html'
-    permission_required='basic_elements.addbasicelement'
+    permission_required='basic_elements.add_basicelement'
     permission_denied_message='Acceso denegado. Usuario no autorizado'
 
     def form_valid(self,form):
@@ -41,7 +41,7 @@ class BasicElementEdit(PermissionRequiredMixin,UpdateView):
     model=BasicElement
     form_class=BasicElementCreateForm
     template_name='create_basic_element.html'
-    permission_required='basic_elements.change_basic_element'
+    permission_required='basic_elements.change_basicelement'
     permission_denied_message='Acceso denegado. Usuario no autorizado'
 
     def form_valid(self,form):

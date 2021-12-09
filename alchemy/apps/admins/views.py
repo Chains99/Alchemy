@@ -86,11 +86,12 @@ class AdminDelete(PermissionRequiredMixin,DeleteView):
 
 @permission_required('admins.change_admin')
 def list(request,pk):
+    subject=Subject.objects.get(id=pk)
     imparts=Imparts.objects.filter(subject=pk).exclude(professor__isnull=True)
     study=Study.objects.filter(subject=pk)
 
     context={
-        'pk':pk,
+        'subject':subject,
         'imparts':imparts,
         'study':study
     }
