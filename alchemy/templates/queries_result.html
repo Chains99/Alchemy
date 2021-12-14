@@ -64,6 +64,7 @@
                     <th>Nombre</th>
                     <th>Cantidad</th>
                     <th>Valor</th>
+                    <th>Asignatura</th>
                 </tr>
             </thead>
             <tbody>
@@ -72,6 +73,7 @@
                     <td>{{elem.name}}</td>
                     <td>{{elem.cant_elem1}}</td>
                     <td>{{elem.value}}</td>
+                    <td>{{elem.subject}}</td>
                 </tr>
                 {%endfor%}
             </tbody>
@@ -110,6 +112,9 @@
                 <tr>
                     <th>Nombre</th>
                     <th>Fecha de creacion</th>
+                    <th>Estudiante</th>
+                    <th>Apellidos</th>
+                    <th>Asignatura</th>
                 </tr>
             </thead>
             <tbody>
@@ -117,6 +122,9 @@
                 <tr>
                     <td>{{elem.name}}</td>
                     <td>{{elem.date_time_creation}}</td>
+                    <td>{{elem.study.student.first_name}}</td>
+                    <td>{{elem.study.student.last_name}}</td>
+                    <td>{{elem.study.subject.name}}</td>
                 </tr>
                 {%endfor%}
             </tbody>
@@ -132,6 +140,9 @@
                 <tr>
                     <th>Nombre</th>
                     <th>Fecha de creacion</th>
+                    <th>Estudiante</th>
+                    <th>Apellidos</th>
+                    <th>Asignatura</th>
                 </tr>
             </thead>
             <tbody>
@@ -139,6 +150,9 @@
                 <tr>
                     <td>{{elem.name}}</td>
                     <td>{{elem.date_time_creation}}</td>
+                    <td>{{elem.study.student.first_name}}</td>
+                    <td>{{elem.study.student.last_name}}</td>
+                    <td>{{elem.study.subject.name}}</td>
                 </tr>
                 {%endfor%}
             </tbody>
@@ -154,6 +168,9 @@
                 <tr>
                     <th>Nombre</th>
                     <th>Fecha de creacion</th>
+                    <th>Estudiante</th>
+                    <th>Apellidos</th>
+                    <th>Asignatura</th>
                 </tr>
             </thead>
             <tbody>
@@ -161,6 +178,9 @@
                 <tr>
                     <td>{{elem.name}}</td>
                     <td>{{elem.date_time_creation}}</td>
+                    <td>{{elem.study.student.first_name}}</td>
+                    <td>{{elem.study.student.last_name}}</td>
+                    <td>{{elem.study.subject.name}}</td>
                 </tr>
                 {%endfor%}
             </tbody>
@@ -170,12 +190,15 @@
 
     <body>
         {%if elemCreatedDates%}
-        <h2 class="title text-center"> Elementos creados en el año </h2>
+        <h2 class="title text-center"> Elementos creados en un intervalo de fechas </h2>
         <table border="2">
             <thead>
                 <tr>
                     <th>Nombre</th>
                     <th>Fecha de creacion</th>
+                    <th>Estudiante</th>
+                    <th>Apellidos</th>
+                    <th>Asignatura</th>
                 </tr>
             </thead>
             <tbody>
@@ -183,6 +206,9 @@
                 <tr>
                     <td>{{elem.name}}</td>
                     <td>{{elem.date_time_creation}}</td>
+                    <td>{{elem.study.student.first_name}}</td>
+                    <td>{{elem.study.student.last_name}}</td>
+                    <td>{{elem.study.subject.name}}</td>
                 </tr>
                 {%endfor%}
             </tbody>
@@ -192,7 +218,7 @@
     
     <body>
         {%if subjStudentsCredits%}
-        <h2 class="title text-center"> Estudiantes con mas elementos creados </h2>
+        <h2 class="title text-center"> Ranking de estudiantes en una asignatura </h2>
         <table border="2">
             <thead>
                 <tr>
@@ -241,24 +267,51 @@
     </body>
 
     <body>
-        {%if noAcceptedElem%}
-        <h2 class="title text-center"> Elementos no aceptados </h2>
+        {%if rankingDatesTotalCredits%}
+        <h2 class="title text-center"> Ranking de estudiantes por creditos totales en un intervalo de fechas </h2>
         <table border="2">
             <thead>
                 <tr>
-                    <th>Nombre</th>
-                    <th>Asignatura</th>
+                    <th>Estudiante</th>
+                    <th>Apellidos</th>
+                    <th>Creditos acumulados entre esas fechas</th>
                 </tr>
             </thead>
             <tbody>
-                {%for elem in noAcceptedElem%}
+                {%for student in rankingDatesTotalCredits%}
                 <tr>
-                    <td>{{elem.name}}</td>
-                    <td>{{elem.student}}</td>
+                    <td>{{student.first_name}}</td>
+                    <td>{{student.last_name}}</td>
+                    <td>{{student.credits_acum}}</td>
                 </tr>
                 {%endfor%}
             </tbody>
         </table>
         {% endif %}
     </body>
+
+    <body>
+        {%if rankingDatesSubjectCredits%}
+        <h2 class="title text-center"> Ranking de estudiantes por creditos totales en un intervalo de fechas </h2>
+        <table border="2">
+            <thead>
+                <tr>
+                    <th>Estudiante</th>
+                    <th>Apellidos</th>
+                    <th>Creditos acumulados entre esas fechas</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for student in rankingDatesSubjectCredits%}
+                <tr>
+                    <td>{{student.first_name}}</td>
+                    <td>{{student.last_name}}</td>
+                    <td>{{student.credits_acum}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+        {% endif %}
+    </body>
+
 </html>

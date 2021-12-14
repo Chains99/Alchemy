@@ -39,11 +39,17 @@ class ElementsCreatedDates:
     initial_date = forms.DateField(required=True)
     final_date = forms.DateField(required=True)
 
-#Dado una asignatura: mostrar los n estudiantes con mas creditos
+#Dado una asignatura: mostrar el ranking de estudiantes
 class SubjectStudentsCreditsForm(Form):
-    n_students_subCredits = forms.IntegerField(min_value=1, required=True, initial=10)
     subject_name = forms.CharField(label="Nombre de la asignatura", required=True)
 
-#Dado una asignatura: mostrar los elementos no basicos que aun no han sido aceptados
-class NoAcceptedNonBasicElemForm(Form):
+#Dado un intervalo de fechas mostrar el ranking de los estudiantes (por creditos totales)
+class RankingByDatesTotalCreditsForm(Form):
+    initial_date = forms.DateField(required=True)
+    final_date = forms.DateField(required=True)
+
+#Dado un intervalo de fechas y una asignatura mostrar el ranking de los estudiantes (por creditos de la asignatura)
+class RankingByDatesSubjectCredits(Form):
+    initial_date = forms.DateField(required=True)
+    final_date = forms.DateField(required=True)
     subject_name = forms.CharField(label="Nombre de la asignatura", required=True)

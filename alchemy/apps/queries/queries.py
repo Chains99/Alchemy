@@ -1,3 +1,4 @@
+from django.db.models.aggregates import Sum
 from django.http import response
 from django.urls.base import reverse
 from apps.elements.models import Element
@@ -31,7 +32,7 @@ class MoreElementsCreated(Query): #OK
         self.n = n
 
     def execute(self, context):
-        moreElemCreated = NonBasicElement.objects.all().select_related().values('study__student').annotate(count_elem=Count('id'))[:self.n]
+        moreElemCreated = NonBasicElement.objects.all().select_related().values('study__student').annotate(count_elem=Count('id')).order_by('count_elem').reverse()[:self.n]
         length = len(list(moreElemCreated))
         for i in range(length):
             id_stud = int(moreElemCreated[i]['study__student'])
@@ -53,8 +54,8 @@ class MoreBasicElementsUsed(Query): #OK
         moreBasicElemUsed2 = NonBasicElement.objects.all().select_related().filter(study__subject__name=self.subject_name).values('element2_id').annotate(cant_elem2=Count('element2_id'))[:self.n]
         list1 = list(moreBasicElemUsed)
         list2 = list(moreBasicElemUsed2)
-        print(list1)
-        print(list2)
+        print("LISTAA 1 ", list1)
+        print("LISTAA 2 ", list2)
 
         for i in range(len(list1)):
             id_elem1 = int(list1[i]['element1_id'])
@@ -78,9 +79,10 @@ class MoreBasicElementsUsed(Query): #OK
 
         for i in range(len(moreBasicElemUsed)):
             id_elem = int(moreBasicElemUsed[i]['element1_id'])
-            elem = Element.objects.get(id = id_elem)
+            elem = BasicElement.objects.get(id = id_elem)
             moreBasicElemUsed[i]['name'] = elem.name
             moreBasicElemUsed[i]['value'] = elem.value
+            moreBasicElemUsed[i]['subject'] = elem.imparts.subject.name
 
         print(moreBasicElemUsed)
         context["moreBasicElemUsed"] = moreBasicElemUsed
@@ -148,12 +150,11 @@ class ElementsCreatedDates(Query): #OK
         return context
 
 class SubjectStudentsCredits(Query): #OK
-    def __init__(self, n, subject_name) -> None:
-        self.n = n
+    def __init__(self, subject_name) -> None:
         self.subject_name = subject_name
 
     def execute(self, context):
-        query1 = Study.objects.all().filter(subject__name=self.subject_name).order_by('credits').reverse()[:self.n]
+        query1 = Study.objects.all().filter(subject__name=self.subject_name).order_by('credits').reverse()
         subjStudentsCredits = []
 
         for elem in query1:
@@ -170,26 +171,45 @@ class BestStudentBySubject(Query): #OK
         
         for subject in subjects:
             subject_name = subject.name
-            student = SubjectStudentsCredits(1, subject_name).execute({})["subjStudentsCredits"][0]
-            student["subject"] = subject_name
-            bestStudentBySubj.append(student)
-        
+            elem = Study.objects.all().filter(subject__name=subject_name).order_by('credits').reverse().first()
+            student = Student.objects.get(username = elem.student)
+            bestStudentBySubj.append({'firstname':student.first_name, 'lastname':student.last_name, 'credits': elem.credits, 'subject':subject_name})
+
         print(bestStudentBySubj)
         context["bestStudentBySubj"] = bestStudentBySubj
         return context
 
-class NoAcceptedNonBasicElem(Query): #OK
-    def __init__(self, subject_name) -> None:
-        self.subject_name = subject_name
-    
-    def execute(self, context):
-        query1 = NonBasicElement.objects.all().filter(study__subject__name=self.subject_name, accepted=False)
-        noAcceptedElem = []
+class RankingByDatesTotalCredits(Query):
+    def __init__(self, initial_date, final_date) -> None:
+        self.initial_date = initial_date
+        self.final_date = final_date
 
-        for elem in query1:
-            student = Student.objects.get(username = elem.study.student)
-            noAcceptedElem.append({'name': elem.name, 'student': (student.first_name + " " + student.last_name)})
+    def execute(self, context):
+        rankingDates = NonBasicElement.objects.all().select_related().filter(date_time_creation__range=[self.initial_date, self.final_date]).values('study__student').annotate(credits_acum=Sum('value')).order_by('study__student__credits').reverse()
         
-        print(noAcceptedElem)
-        context["noAcceptedElem"] = noAcceptedElem
+        for i in range(len(rankingDates)):
+            id_student = int(rankingDates[i]['study__student'])
+            student = Student.objects.get(id = id_student)
+            rankingDates[i]['first_name'] = student.first_name
+            rankingDates[i]['last_name'] = student.last_name
+        print(rankingDates)        
+        context["rankingDatesTotalCredits"] = rankingDates
+        return context
+
+class RankingByDatesSubjectCredits(Query):
+    def __init__(self, initial_date, final_date, subject_name) -> None:
+        self.initial_date = initial_date
+        self.final_date = final_date
+        self.subject_name = subject_name
+
+    def execute(self, context):
+        rankingDates = NonBasicElement.objects.all().select_related().filter(date_time_creation__range=[self.initial_date, self.final_date], study__subject__name=self.subject_name).values('study__student').annotate(credits_acum=Sum('value')).order_by('study__student__credits').reverse()
+        
+        for i in range(len(rankingDates)):
+            id_student = int(rankingDates[i]['study__student'])
+            student = Student.objects.get(id = id_student)
+            rankingDates[i]['first_name'] = student.first_name
+            rankingDates[i]['last_name'] = student.last_name
+        print(rankingDates)        
+        context["rankingDatesSubjectCredits"] = rankingDates
         return context

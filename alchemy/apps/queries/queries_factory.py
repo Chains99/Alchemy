@@ -91,11 +91,18 @@ class SubjectStudentsCreditsFactory(QueryFactory):
         self.name = 'subjStudentsCredits'
 
     def get_instance(self, data):
-        return SubjectStudentsCredits(int(data['n_students_subCredits']), data["subject_name"])
+        return SubjectStudentsCredits(data["subject_name"])
 
-class NoAcceptedNonBasicElemFactory(QueryFactory):
+class RankingByDatesTotalCreditsFactory(QueryFactory):
     def __init__(self):
-        self.name = 'noAcceptedElem'
-
+        self.name = "rankingDatesTotalCredits"
+    
     def get_instance(self, data):
-        return NoAcceptedNonBasicElem(data["subject_name"])
+        return RankingByDatesTotalCredits(data["initial_date"], data["final_date"])
+
+class RankingByDatesSubjectCreditsFactory(QueryFactory):
+    def __init__(self):
+        self.name = "rankingDatesSubjectCredits"
+    
+    def get_instance(self, data):
+        return RankingByDatesSubjectCredits(data["initial_date"], data["final_date"], data["subject_name"])

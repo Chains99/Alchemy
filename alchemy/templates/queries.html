@@ -27,6 +27,7 @@
 <form action="{% url 'queries_result' %}" method="post"> {%csrf_token%}
     <label for="numeroElem1">Numero de Elementos: </label>
     <input type="number" name="n_elements_basic" min=1 value="10">
+    <label for="subjectname1">Asignatura: </label>
     <input type="text" name="subject_name">
     <input type="submit" value="Consultar">
     <input type="hidden" name="form-type" value="moreBasicElemUsed" />
@@ -37,6 +38,7 @@
 <form action="{% url 'queries_result' %}" method="post"> {%csrf_token%}
     <label for="numeroElem2">Numero de Elementos: </label>
     <input type="number" name="n_elements_noBasic" min=1 value="10">
+    <label for="subjectname2">Asignatura: </label>
     <input type="text" name="subject_name">
     <input type="submit" value="Consultar">
     <input type="hidden" name="form-type" value="moreValNoBasicElem" />
@@ -46,6 +48,7 @@
 <form action="{% url 'queries_result' %}" method="post"> {%csrf_token%}
     <label for="numeroElem3">Numero de Elementos: </label>
     <input type="number" name="n_elements_valbasic" min=1 value="10">
+    <label for="subjectname3">Asignatura: </label>
     <input type="text" name="subject_name">
     <input type="submit" value="Consultar">
     <input type="hidden" name="form-type" value="moreValBasicElem" />
@@ -75,7 +78,7 @@
     <input type="hidden" name="form-type" value="elemCreatedYear" />
 </form>
 
-<h2 class="title text-center"> Elementos creados en el intervalo de fechas </h2>
+<h2 class="title text-center"> Elementos creados en un intervalo de fechas </h2>
 <form action="{% url 'queries_result' %}" method="post">{% csrf_token %}
     <label for="intervalDates">Fecha Inicial: </label>
     <input type="date" name="initial_date">
@@ -85,10 +88,9 @@
     <input type="hidden" name="form-type" value="elemCreatedDates" />
 </form>
 
-<h2 class="title text-center"> Estudiantes con mas creditos acumulados en una asignatura</h2>
+<h2 class="title text-center"> Ranking de estudiantes en una asignatura</h2>
 <form action="{% url 'queries_result' %}" method="post">{% csrf_token %}
-    <label for="numeroEstudiante2">Numero de estudiantes: </label>
-    <input type="number" name="n_students_subCredits" min=1 value="10">
+    <label for="numeroEstudiante2">Asignatura: </label>
     <input type="text" name="subject_name">
     <input type="submit" value="Consultar">
     <input type="hidden" name="form-type" value="subjStudentsCredits" />
@@ -100,10 +102,24 @@
     <input type="submit" value="Consultar">
 </form>
 
-<h2 class="title text-center"> Elementos no aceptados</h2>
+<h2 class="title text-center"> Ranking de estudiantes por creditos totales en un intervalo de fechas </h2>
 <form action="{% url 'queries_result' %}" method="post">{% csrf_token %}
-    <label for="nombreAsig">Asignatura: </label>
+    <label for="intervalDates2">Fecha Inicial: </label>
+    <input type="date" name="initial_date">
+    <label for="intervalDates3">Fecha Final : </label>
+    <input type="date" name="final_date">
+    <input type="submit" value="Consultar">
+    <input type="hidden" name="form-type" value="rankingDatesTotalCredits" />
+</form>
+
+<h2 class="title text-center"> Ranking de estudiantes por creditos en una asignatura en un intervalo de fechas </h2>
+<form action="{% url 'queries_result' %}" method="post">{% csrf_token %}
+    <label for="intervalDates4">Fecha Inicial: </label>
+    <input type="date" name="initial_date">
+    <label for="intervalDates5">Fecha Final : </label>
+    <input type="date" name="final_date">
+    <label for="numeroEstudiante4">Asignatura: </label>
     <input type="text" name="subject_name">
     <input type="submit" value="Consultar">
-    <input type="hidden" name="form-type" value="noAcceptedElem" />
+    <input type="hidden" name="form-type" value="rankingDatesSubjectCredits" />
 </form>
