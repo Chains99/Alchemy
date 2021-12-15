@@ -43,6 +43,11 @@ class ElementsCreatedDates:
 class SubjectStudentsCreditsForm(Form):
     subject_name = forms.CharField(label="Nombre de la asignatura", required=True)
 
+#Dado una asignatura: mostrar los n estudiantes con mas creditos
+class SubjectStudentsCreditsNForm(Form):
+    n_students_subCredits = forms.IntegerField(min_value=1, required=True, initial=10)
+    subject_name = forms.CharField(label="Nombre de la asignatura", required=True)
+
 #Dado un intervalo de fechas mostrar el ranking de los estudiantes (por creditos totales)
 class RankingByDatesTotalCreditsForm(Form):
     initial_date = forms.DateField(required=True)

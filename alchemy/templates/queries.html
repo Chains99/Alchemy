@@ -96,11 +96,20 @@
     <input type="hidden" name="form-type" value="subjStudentsCredits" />
 </form>
 
+<h2 class="title text-center"> Estudiantes con mas creditos acumulados en una asignatura</h2>
+<form action="{% url 'queries_result' %}" method="post">{% csrf_token %}
+    <label for="numeroEstudiante6">Numero de estudiantes: </label>
+    <input type="number" name="n_students_subCredits" min=1 value="10">
+    <input type="text" name="subject_name">
+    <input type="submit" value="Consultar">
+    <input type="hidden" name="form-type" value="subjStudentsCreditsN" />
+
 <h2 class="title text-center"> Estudiante con mas creditos acumulados por cada asignatura</h2>
 <form action="{% url 'queries_result' %}" method="get">
     <label for="mejorEstudiante"> Mejor estudiante por asignatura: </label>
     <input type="submit" value="Consultar">
 </form>
+
 
 <h2 class="title text-center"> Ranking de estudiantes por creditos totales en un intervalo de fechas </h2>
 <form action="{% url 'queries_result' %}" method="post">{% csrf_token %}

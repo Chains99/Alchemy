@@ -93,6 +93,13 @@ class SubjectStudentsCreditsFactory(QueryFactory):
     def get_instance(self, data):
         return SubjectStudentsCredits(data["subject_name"])
 
+class SubjectStudentsCreditsNFactory(QueryFactory):
+    def __init__(self):
+        self.name = 'subjStudentsCreditsN'
+
+    def get_instance(self, data):
+        return SubjectStudentsCreditsN(int(data['n_students_subCredits']), data["subject_name"])
+
 class RankingByDatesTotalCreditsFactory(QueryFactory):
     def __init__(self):
         self.name = "rankingDatesTotalCredits"

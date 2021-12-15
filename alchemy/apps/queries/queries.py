@@ -89,7 +89,7 @@ class MoreBasicElementsUsed(Query): #OK
         return context
 
 
-class MoreValuableNoBasicElements(Query): #OK
+class MoreValuableNoBasicElements(Query): #Tiene un errorcito
     def __init__(self, n, subject_name) -> None:
         self.n = n
         self.subject_name = subject_name
@@ -162,6 +162,22 @@ class SubjectStudentsCredits(Query): #OK
             subjStudentsCredits.append({'firstname':student.first_name, 'lastname':student.last_name, 'credits': elem.credits})
         
         context["subjStudentsCredits"] = subjStudentsCredits
+        return context
+
+class SubjectStudentsCreditsN(Query): #OK
+    def __init__(self, n, subject_name) -> None:
+        self.n = n
+        self.subject_name = subject_name
+
+    def execute(self, context):
+        query1 = Study.objects.all().filter(subject__name=self.subject_name).order_by('credits').reverse()[:self.n]
+        subjStudentsCredits = []
+
+        for elem in query1:
+            student = Student.objects.get(username = elem.student)
+            subjStudentsCredits.append({'firstname':student.first_name, 'lastname':student.last_name, 'credits': elem.credits})
+        
+        context["subjStudentsCreditsN"] = subjStudentsCredits
         return context
 
 class BestStudentBySubject(Query): #OK

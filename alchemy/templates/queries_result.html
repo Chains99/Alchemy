@@ -241,6 +241,30 @@
     </body>
 
     <body>
+        {%if subjStudentsCreditsN%}
+        <h2 class="title text-center"> Estudiantes con mas elementos creados </h2>
+        <table border="2">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Creditos</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for student in subjStudentsCreditsN%}
+                <tr>
+                    <td>{{student.firstname}}</td>
+                    <td>{{student.lastname}}</td>
+                    <td>{{student.credits}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+        {% endif %}
+    </body>
+
+    <body>
         {%if bestStudentBySubj%}
         <h2 class="title text-center"> Mejor estudiante por asignatura </h2>
         <table border="2">
