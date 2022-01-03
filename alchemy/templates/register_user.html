@@ -1,18 +1,58 @@
-<!-- This template of the HomePage is a child of MainTemplate -->
-{% extends "_main_template.html" %}
-
-<!-- Load static files -->
 {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/w3.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style_main_temp.css' %}">
+    <title>Registro</title>
+</head>
+<body>
+    <div class="w3-sand w3-grayscale w3-large">
+        <div class="w3-container w3-center w3-padding-64" >
+            <div class="w3-content w3-padding-64" style="max-width:550px">
+                <div class="w3-row w3-center w3-card w3-padding">
+                    <form method="post"> {% csrf_token %}
+                        {{form.non_field_errors }}
+                        {{form.username.errors}}
+                        <label style="font-size: 21px;" for="{{form.username.id_for_label}}">{{form.username.label}}</label>
+                        <input class="w3-input w3-padding-16 w3-border" type="text" id='{{ form.username.id_for_label }}"' name="{{ form.username.html_name }}" placeholder="Nombre de usuario" {% if not form.username.value is None %} value="{{form.username.value}}" {% endif %}>
+                        <br><br>
+                        {{form.first_name.errors}}
+                        <label style="font-size: 21px;" for="{{form.first_name.id_for_label}}">{{form.first_name.label}}</label>
+                        <input class="w3-input w3-padding-16 w3-border" type="text" id='{{ form.first_name.id_for_label }}"' name="{{ form.first_name.html_name }}" placeholder="Nombre" {% if not form.first_name.value is None %} value="{{form.first_name.value}}" {% endif %}>
+                        <br><br>
+                        {{form.last_name.errors}}
+                        <label style="font-size: 21px;" for="{{form.last_name.id_for_label}}">{{form.last_name.label}}</label>
+                        <input class="w3-input w3-padding-16 w3-border" type="text" id='{{ form.last_name.id_for_label }}"' name="{{ form.last_name.html_name }}" placeholder="Aplellidos" {% if not form.last_name.value is None %} value="{{form.last_name.value}}" {% endif %}>
+                        <br><br>
+                        {{form.email.errors}}
+                        <label style="font-size: 21px;" for="{{form.email.id_for_label}}">{{form.email.label}}</label>
+                        <input class="w3-input w3-padding-16 w3-border" type="email" id='{{ form.email.id_for_label }}"' name="{{ form.email.html_name }}" placeholder="Correo electrónico" {% if not form.email.value is None %} value="{{form.email.value}}" {% endif %}>
+                        <br><br>
+                        {{form.password1.errors}}
+                        <label style="font-size: 21px;" for="{{form.password1.id_for_label}}">{{form.password1.label}}</label>
+                        <input class="w3-input w3-padding-16 w3-border" type="password" id='{{ form.password1.id_for_label }}"' name="{{ form.password1.html_name }}" placeholder="Contraseña" >
+                        <br><br>
+                        {{form.password2.errors}}
+                        <label style="font-size: 21px;" for="{{form.password2.id_for_label}}">{{form.password2.label}}</label>
+                        <input class="w3-input w3-padding-16 w3-border" type="password" id='{{ form.password2.id_for_label }}"' name="{{ form.password2.html_name }}" placeholder="Confirmar contraseña" >
+                        
+                        <div class="w3-padding-32">
+                            <button class="w3-button w3-tag w3-dark-grey" type="submit">Registrar o Editar</button>
+                        </div>
+                    </form>
+                </div> 
+            </div>
+        </div>
+    </div>
 
-<!-- Put title -->
-{%block title%}
-Registro
-{% endblock %}
+    <footer class="w3-center w3-light-grey w3-padding-48 w3-large">
+        <p>Powered by MATCOM</a></p>
+    </footer>
+</body>
 
-<!-- Put content -->
-{% block content %}
-    <form method="post">  {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit">Registrar o Editar</button>
-    </form>
-{% endblock %}
+</html>

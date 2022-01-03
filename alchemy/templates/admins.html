@@ -1,20 +1,22 @@
-<!-- This template of the HomePage is a child of MainTemplate -->
-{% extends "_main_template.html" %}
-
-<!-- Load static files -->
 {% load static %}
-
-<!-- Put title -->
-{%block title%}
-Administradores
-{% endblock %}
-
-<!-- Put content -->
-{% block content %}
-    <header>
-        <h1>Administradores</h1>
-    </header>
-    <table border="2">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/w3.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style_main_temp.css' %}">
+    <title>Estudiantes</title>
+</head>
+<body>
+<div class="w3-sand w3-grayscale w3-large">
+    <div class="w3-container w3-center" id="about">
+        <div class="w3-content" style="max-width:50%">
+          <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Administradores</span></h4>
+    
+    <table class="w3-table-all">
         <thead>
             <tr>
                 <th>Nombre de usuario</th>
@@ -34,13 +36,26 @@ Administradores
                 <td>{{admin.last_name}}</td>
                 <td>{{admin.email}}</td>
                 {% if perms.admins.delete_admin %}                    
-                    <td><a href="{% url 'delete_admin' admin.id %}">Eliminar</a></td>
+                    <td><a class="w3-button w3-tag w3-dark-grey" href="{% url 'delete_admin' admin.id %}">Eliminar</a></td>
                 {% endif %}
             </tr>
             {% endfor %}
         </tbody>
     </table>
+    
+</div>
+</div>
+<br> <br>
+<div class="w3-content w3-center" >
     {%if perms.admins.add_admin%}
-        <a href={%url 'register_admin'%}>Registrar nuevo administrador</a>
+        <a class="w3-button w3-tag w3-dark-grey" href={%url 'register_admin'%}>Registrar nuevo administrador</a>
     {%endif%}
-{% endblock %}
+</div>
+</div>
+
+<footer class="w3-center w3-light-grey w3-padding-48 w3-large">
+    <p>Powered by MATCOM</a></p>
+</footer>
+</body>
+
+</html>

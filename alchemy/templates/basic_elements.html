@@ -1,25 +1,22 @@
-<!-- This template of the HomePage is a child of MainTemplate -->
-{% extends "_main_template.html" %}
-
-<!-- Load static files -->
 {% load static %}
-
-<!-- Put title -->
-{%block title%}
-Elementos básicos
-{% endblock %}
-
-<!-- Put content -->
-{% block content %}
-
-    {%if perms.basic_elements.add_basicelement%}
-    <a href={%url 'create_basic_element' pk %}>Añadir elemento básico</a>
-    {%endif%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/w3.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style_main_temp.css' %}">
+    <title>Elementos básicos</title>
+</head>
+<body>
+<div class="w3-sand w3-grayscale w3-large">
+    <div class="w3-container w3-center" id="about">
+        <div class="w3-content" style="max-width:700px">
+          <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Elementos básicos de la asignatura</span></h4>
     
-    <header>
-        <h1>Elementos básicos de la asignatura</h1>
-    </header>
-    <table border="2">
+    <table class="w3-table-all">
         <thead>
             <tr>
                 <th>Nombre</th>
@@ -39,9 +36,9 @@ Elementos básicos
                 <td>{{element.visible}}</td> 
                 <td>
                 {%if not element.visible%}
-                <a href={%url 'make_visible' element.id %}>Hacer visible</a>
-                <a href={%url 'edit_basic_element' element.id %}>Editar</a>
-                <a href={%url 'delete_basic_element' element.id %}>Eliminar</a>
+                <a class="w3-button w3-tag w3-dark-grey" href={%url 'make_visible' element.id %}>Hacer visible</a>
+                <a class="w3-button w3-tag w3-dark-grey" href={%url 'edit_basic_element' element.id %}>Editar</a>
+                <a class="w3-button w3-tag w3-dark-grey" href={%url 'delete_basic_element' element.id %}>Eliminar</a>
                 {%endif%}
                 </td>
                 {%endif%}     
@@ -49,5 +46,20 @@ Elementos básicos
             {% endfor %}
         </tbody>
     </table>
+    
+</div>
+</div>
+<br> <br>
+<div class="w3-content w3-center" >
+    {%if perms.basic_elements.add_basicelement%}
+    <a class="w3-button w3-tag w3-dark-grey" href={%url 'create_basic_element' pk %}>Añadir elemento básico</a>
+    {%endif%}
+</div>
+</div>
 
-{% endblock %}
+<footer class="w3-center w3-light-grey w3-padding-48 w3-large">
+    <p>Powered by MATCOM</a></p>
+</footer>
+</body>
+
+</html>

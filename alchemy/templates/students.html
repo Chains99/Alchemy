@@ -1,20 +1,22 @@
-<!-- This template of the HomePage is a child of MainTemplate -->
-{% extends "_main_template.html" %}
-
-<!-- Load static files -->
 {% load static %}
-
-<!-- Put title -->
-{%block title%}
-Estudiantes
-{% endblock %}
-
-<!-- Put content -->
-{% block content %}
-    <header>
-        <h1>Estudiantes</h1>
-    </header>
-    <table border="2">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/w3.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style_main_temp.css' %}">
+    <title>Estudiantes</title>
+</head>
+<body>
+<div class="w3-sand w3-grayscale w3-large">
+    <div class="w3-container w3-center" id="about">
+        <div class="w3-content" style="max-width:700px">
+          <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Estudiantes</span></h4>
+    
+    <table class="w3-table-all">
         <thead>
             <tr>
                 <th>Nombre de usuario</th>
@@ -34,10 +36,27 @@ Estudiantes
                 <td>{{student.last_name}}</td>
                 <td>{{student.email}}</td>
                 {% if perms.professors.delete_professor %}                    
-                    <td><a href="{% url 'delete_student' student.id %}">Eliminar</a></td>
+                    <td><a class="w3-button w3-tag w3-dark-grey" href="{% url 'delete_student' student.id %}">Eliminar</a></td>
                 {% endif %}
             </tr>
             {% endfor %}
         </tbody>
     </table>
-{% endblock %}
+    
+</div>
+</div>
+<br> <br>
+<div class="w3-content w3-center" >
+    {%if perms.subjects.add_subject%}
+        <a class="w3-button w3-tag w3-dark-grey " href={%url 'create_subject'%}>Añadir nueva asignatura</a>
+    {%endif%}
+
+</div>
+</div>
+
+<footer class="w3-center w3-light-grey w3-padding-48 w3-large">
+    <p>Powered by MATCOM</a></p>
+</footer>
+</body>
+
+</html>
