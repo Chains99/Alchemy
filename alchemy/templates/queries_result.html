@@ -1,12 +1,20 @@
-{%block title%}
-<h1>Respuesta de la Consulta</h1>
-{%endblock%}
-
-<html>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/w3.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style_main_temp.css' %}">
+    <title>Respuesta de la Consulta</title>
+</head>
+<div class="w3-content w3-padding-64" style="max-width:700px">
     <body>
         {%if moreCredits%}
-        <h2 class="title text-center"> Estudiantes con mas creditos </h2>
-        <table border="2">
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Estudiantes con mas créditos</span></h4>
+        <table class="w3-table-all">
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -31,8 +39,8 @@
 
     <body>
         {%if moreElemCreated%}
-        <h2 class="title text-center"> Estudiantes con mas elementos creados </h2>
-        <table border="2">
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Estudiantes con mas elementos creados</span></h4>
+        <table class="w3-table-all">
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -57,8 +65,8 @@
 
     <body>
         {%if moreBasicElemUsed%}
-        <h2 class="title text-center"> Elementos mas utilizados para realizar mezclas </h2>
-        <table border="2">
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Elementos mas utilizados para realizar mezclas</span></h4>
+        <table class="w3-table-all">
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -83,8 +91,8 @@
 
     <body>
         {%if moreValNoBasicElem%}
-        <h2 class="title text-center"> Elementos mas utilizados para realizar mezclas </h2>
-        <table border="2">
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Elementos mas utilizados para realizar mezclas</span></h4>
+        <table class="w3-table-all">
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -106,8 +114,8 @@
 
     <body>
         {%if elemCreatedDay%}
-        <h2 class="title text-center"> Elementos creados en el dia </h2>
-        <table border="2">
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Elementos creados en el dia</span></h4>
+        <table class="w3-table-all">
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -134,8 +142,8 @@
 
     <body>
         {%if elemCreatedMonth%}
-        <h2 class="title text-center"> Elementos creados en el mes </h2>
-        <table border="2">
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Elementos creados en el mes</span></h4>
+        <table class="w3-table-all">
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -162,8 +170,8 @@
 
     <body>
         {%if elemCreatedYear%}
-        <h2 class="title text-center"> Elementos creados en el año </h2>
-        <table border="2">
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Elementos creados en el año</span></h4>
+        <table class="w3-table-all">
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -191,7 +199,7 @@
     <body>
         {%if elemCreatedDates%}
         <h2 class="title text-center"> Elementos creados en un intervalo de fechas </h2>
-        <table border="2">
+        <table class="w3-table-all">
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -218,8 +226,8 @@
     
     <body>
         {%if subjStudentsCredits%}
-        <h2 class="title text-center"> Ranking de estudiantes en una asignatura </h2>
-        <table border="2">
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Ranking de estudiantes en una asignatura</span></h4>
+        <table class="w3-table-all">
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -242,8 +250,8 @@
 
     <body>
         {%if subjStudentsCreditsN%}
-        <h2 class="title text-center"> Estudiantes con mas elementos creados </h2>
-        <table border="2">
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Estudiantes con mas elementos creados</span></h4>
+        <table class="w3-table-all">
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -266,8 +274,8 @@
 
     <body>
         {%if bestStudentBySubj%}
-        <h2 class="title text-center"> Mejor estudiante por asignatura </h2>
-        <table border="2">
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Mejor estudiante por asignatura</span></h4>
+        <table class="w3-table-all">
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -292,8 +300,8 @@
 
     <body>
         {%if rankingDatesTotalCredits%}
-        <h2 class="title text-center"> Ranking de estudiantes por creditos totales en un intervalo de fechas </h2>
-        <table border="2">
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Ranking de estudiantes por créditos totales en un intervalo de fechas</span></h4>
+        <table class="w3-table-all">
             <thead>
                 <tr>
                     <th>Estudiante</th>
@@ -316,8 +324,8 @@
 
     <body>
         {%if rankingDatesSubjectCredits%}
-        <h2 class="title text-center"> Ranking de estudiantes por creditos totales en un intervalo de fechas </h2>
-        <table border="2">
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Ranking de estudiantes por créditos totales en un intervalo de fechas</span></h4>
+        <table class="w3-table-all">
             <thead>
                 <tr>
                     <th>Estudiante</th>
@@ -337,5 +345,5 @@
         </table>
         {% endif %}
     </body>
-
+</div>
 </html>
