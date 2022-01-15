@@ -1,134 +1,217 @@
-<!-- Load static files -->
 {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/w3.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style_main_temp.css' %}">
+    <title>Consultas disponibles</title>
+</head>
+<body>
+    <div class="w3-sand w3-grayscale w3-large">
+        <div class="w3-container w3-center w3-padding-64" >
+            <div class="w3-content w3-padding-32" style="max-width:600px">
+                <h4 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">Estudiantes con mas creditos</span></h4>
+                <div class="w3-row w3-center w3-card w3-padding">
+                    <form action="{% url 'queries_result' %}" method="post"> {% csrf_token %}
+                        <label style="font-size: 21px;" for="numeroEstudiante">Numero de Estudiantes: </label>
+                        <input class="w3-input w3-padding-16 w3-border" type="number" name="n_students_credits" min=1 value="10">                        
+                        <div class="w3-padding-16">
+                            <input class="w3-button w3-tag w3-dark-grey" type="submit" value="Consultar">
+                            <input type="hidden" name="form-type" value="moreCredits"/>
+                        </div>
+                    </form>
+                </div> 
+            </div>
+            <div class="w3-content w3-padding-64" style="max-width:600px">
+                <h4 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">Estudiantes con mas elementos creados</span></h4>
+                <div class="w3-row w3-center w3-card w3-padding">
+                    <form action="{% url 'queries_result' %}" method="post"> {% csrf_token %}
+                        <label style="font-size: 21px;" for="numeroEstudiante1">Numero de Estudiantes: </label>
+                        <input class="w3-input w3-padding-16 w3-border" type="number" name="n_students_elemCreated" min=1 value="10"> 
+                        <div class="w3-padding-16">
+                            <input class="w3-button w3-tag w3-dark-grey" type="submit" value="Consultar">
+                            <input type="hidden" name="form-type" value="moreElemCreated"/>
+                        </div>
+                    </form>
+                </div> 
+            </div>
+            <div class="w3-content w3-padding-64" style="max-width:600px">
+                <h4 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">Elementos mas utilizados para realizar mezclas</span></h4>
+                <div class="w3-row w3-center w3-card w3-padding">
+                    <form action="{% url 'queries_result' %}" method="post"> {% csrf_token %}
+                        <label style="font-size: 21px;" for="numeroElem1">Número de Elementos: </label>
+                        <input class="w3-input w3-padding-16 w3-border" type="number" name="n_elements_basic" min=1 value="10">
+                        <label style="font-size: 21px;" for="subjectname1">Asignatura: </label>
+                        <select class="w3-input w3-padding-16 w3-border" {{form.subjects}} </select>
+                            {% for subject in subjects %}
+                                <option  value="1">as</option>
+                            {% endfor %}
+                        <div class="w3-padding-16">
+                            <input class="w3-button w3-tag w3-dark-grey" type="submit" value="Consultar">
+                            <input type="hidden" name="form-type" value="moreBasicElemUsed"/>
+                        </div>
+                    </form>
+                </div> 
+            </div>
+            <div class="w3-content w3-padding-64" style="max-width:600px">
+                <h4 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">Elementos más valiosos de los elementos no básicos</span></h4>
+                <div class="w3-row w3-center w3-card w3-padding">
+                    <form action="{% url 'queries_result' %}" method="post"> {% csrf_token %}
+                        <label style="font-size: 21px;" for="numeroElem2">Número de Elementos: </label>
+                        <input class="w3-input w3-padding-16 w3-border" type="number" name="n_elements_noBasic" min=1 value="10">
+                        <div class="w3-padding-16">
+                            <input class="w3-button w3-tag w3-dark-grey" type="submit" value="Consultar">
+                            <input type="hidden" name="form-type" value="moreValNoBasicElem"/>
+                        </div>
+                    </form>
+                </div> 
+            </div>
+            <div class="w3-content w3-padding-64" style="max-width:600px">
+                <h4 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">Elementos más valiosos de los elementos básicos</span></h4>
+                <div class="w3-row w3-center w3-card w3-padding">
+                    <form action="{% url 'queries_result' %}" method="post"> {% csrf_token %}
+                        <label style="font-size: 21px;" for="numeroElem3">Número de Elementos: </label>
+                        <input class="w3-input w3-padding-16 w3-border" type="number" name="n_elements_valbasic" min=1 value="10">
+                        <div class="w3-padding-16">
+                            <input class="w3-button w3-tag w3-dark-grey" type="submit" value="Consultar">
+                            <input type="hidden" name="form-type" value="moreValBasicElem"/>
+                        </div>
+                    </form>
+                </div> 
+            </div>
+            <div class="w3-content w3-padding-64" style="max-width:600px">
+                <h4 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">Elementos creados en el día</span></h4>
+                <div class="w3-row w3-center w3-card w3-padding">
+                    <form action="{% url 'queries_result' %}" method="post"> {% csrf_token %}
+                        <label style="font-size: 21px;" for="day">Día: </label>
+                        <input class="w3-input w3-padding-16 w3-border" type="number" name="day" min=1 max=31 value="1">
+                        <div class="w3-padding-16">
+                            <input class="w3-button w3-tag w3-dark-grey" type="submit" value="Consultar">
+                            <input type="hidden" name="form-type" value="elemCreatedDay"/>
+                        </div>
+                    </form>
+                </div> 
+            </div>
+            <div class="w3-content w3-padding-64" style="max-width:600px">
+                <h4 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">Elementos creados en el mes</span></h4>
+                <div class="w3-row w3-center w3-card w3-padding">
+                    <form action="{% url 'queries_result' %}" method="post"> {% csrf_token %}
+                        <label style="font-size: 21px;" for="team_name">Mes: </label>
+                        <input class="w3-input w3-padding-16 w3-border" type="number" name="month" min=1 max=12 value="1">
+                        <div class="w3-padding-16">
+                            <input class="w3-button w3-tag w3-dark-grey" type="submit" value="Consultar">
+                            <input type="hidden" name="form-type" value="elemCreatedMonth"/>
+                        </div>
+                    </form>
+                </div> 
+            </div>
+            <div class="w3-content w3-padding-64" style="max-width:600px">
+                <h4 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">Elementos creados en el año</span></h4>
+                <div class="w3-row w3-center w3-card w3-padding">
+                    <form action="{% url 'queries_result' %}" method="post"> {% csrf_token %}
+                        <label style="font-size: 21px;" for="year">Año: </label>
+                        <input class="w3-input w3-padding-16 w3-border" type="number" name="year" min=2000 value=2021>
+                        <div class="w3-padding-16">
+                            <input class="w3-button w3-tag w3-dark-grey" type="submit" value="Consultar">
+                            <input type="hidden" name="form-type" value="elemCreatedYear"/>
+                        </div>
+                    </form>
+                </div> 
+            </div>
+            <div class="w3-content w3-padding-64" style="max-width:600px">
+                <h4 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">Elementos creados en un intervalo de fechas</span></h4>
+                <div class="w3-row w3-center w3-card w3-padding">
+                    <form action="{% url 'queries_result' %}" method="post"> {% csrf_token %}
+                        <label style="font-size: 21px;" for="intervalDates">Fecha Inicial: </label>
+                        <input class="w3-input w3-padding-16 w3-border" type="date" name="initial_date">
+                        <label style="font-size: 21px;" for="intervalDates1">Fecha Final: </label>
+                        <input class="w3-input w3-padding-16 w3-border" type="date" name="final_date">
+                        <div class="w3-padding-16">
+                            <input class="w3-button w3-tag w3-dark-grey" type="submit" value="Consultar">
+                            <input type="hidden" name="form-type" value="elemCreatedDates"/>
+                        </div>
+                    </form>
+                </div> 
+            </div>
+            <div class="w3-content w3-padding-64" style="max-width:600px">
+                <h4 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">Ranking de estudiantes en una asignatura</span></h4>
+                <div class="w3-row w3-center w3-card w3-padding">
+                    <form action="{% url 'queries_result' %}" method="post"> {% csrf_token %}
+                        <label style="font-size: 21px;" for="numeroEstudiante2">Asignatura: </label>
+                        <input class="w3-input w3-padding-16 w3-border" type="text" name="subject_name">
+                        <div class="w3-padding-16">
+                            <input class="w3-button w3-tag w3-dark-grey" type="submit" value="Consultar">
+                            <input type="hidden" name="form-type" value="subjStudentsCredits"/>
+                        </div>
+                    </form>
+                </div> 
+            </div>
+            <div class="w3-content w3-padding-64" style="max-width:600px">
+                <h4 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">Estudiantes con más créditos acumulados en una asignatura</span></h4>
+                <div class="w3-row w3-center w3-card w3-padding">
+                    <form action="{% url 'queries_result' %}" method="post"> {% csrf_token %}
+                        <label style="font-size: 21px;" for="numeroEstudiante6">Numero de estudiantes: </label>
+                        <input class="w3-input w3-padding-16 w3-border" type="number" name="n_students_subCredits" min=1 value="10">
+                        <label style="font-size: 21px;" for="numeroEstudiante6">Asignatura: </label>
+                        <input class="w3-input w3-padding-16 w3-border" type="text" name="subject_name">
+                        <div class="w3-padding-16">
+                            <input class="w3-button w3-tag w3-dark-grey" type="submit" value="Consultar">
+                            <input type="hidden" name="form-type" value="subjStudentsCreditsN"/>
+                        </div>
+                    </form>
+                </div> 
+            </div>
+            <div class="w3-content w3-padding-64" style="max-width:600px">
+                <h4 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">Estudiante con mas créditos acumulados por cada asignatura</span></h4>
+                <div class="w3-row w3-center w3-card w3-padding">
+                    <form action="{% url 'queries_result' %}" method="get"> {% csrf_token %}
+                        <label style="font-size: 21px;" for="mejorEstudiante"> Mejor estudiante por asignatura: </label>
+                        <div class="w3-padding-16">
+                            <input class="w3-button w3-tag w3-dark-grey" type="submit" value="Consultar">
+                        </div>
+                    </form>
+                </div> 
+            </div>
+            <div class="w3-content w3-padding-64" style="max-width:600px">
+                <h4 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">Ranking de estudiantes por créditos totales en un intervalo de fechas</span></h4>
+                <div class="w3-row w3-center w3-card w3-padding">
+                    <form action="{% url 'queries_result' %}" method="post"> {% csrf_token %}
+                        <label style="font-size: 21px;" for="intervalDates2">Fecha Inicial: </label>
+                        <input class="w3-input w3-padding-16 w3-border" type="date" name="initial_date">
+                        <label style="font-size: 21px;" for="intervalDates3">Fecha Final: </label>
+                        <input class="w3-input w3-padding-16 w3-border" type="date" name="final_date">
+                        <div class="w3-padding-16">
+                            <input class="w3-button w3-tag w3-dark-grey" type="submit" value="Consultar">
+                            <input type="hidden" name="form-type" value="rankingDatesTotalCredits"/>
+                        </div>
+                    </form>
+                </div> 
+            </div>
+            <div class="w3-content w3-padding-64" style="max-width:600px">
+                <h4 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">Ranking de estudiantes por creditos en una asignatura en un intervalo de fechas</span></h4>
+                <div class="w3-row w3-center w3-card w3-padding">
+                    <form action="{% url 'queries_result' %}" method="post"> {% csrf_token %}
+                        <label style="font-size: 21px;" for="intervalDates4">Fecha Inicial: </label>
+                        <input class="w3-input w3-padding-16 w3-border" type="date" name="initial_date">
+                        <label style="font-size: 21px;" for="intervalDates5">Fecha Final: </label>
+                        <input class="w3-input w3-padding-16 w3-border" type="date" name="final_date">
+                        <div class="w3-padding-16">
+                            <input class="w3-button w3-tag w3-dark-grey" type="submit" value="Consultar">
+                            <input type="hidden" name="form-type" value="rankingDatesSubjectCredits"/>
+                        </div>
+                    </form>
+                </div> 
+            </div>
+        </div>
+    </div>
 
-<!-- Put title -->
-{%block title%}
-<h2 class="title text-center"> Consultas Disponibles </h2>
-{% endblock %}
+    <footer class="w3-center w3-light-grey w3-padding-48 w3-large">
+        <p>Powered by MATCOM</a></p>
+    </footer>
+</body>
 
-<h2 class="title text-center"> Estudiantes con mas creditos </h2>
-<form action="{% url 'queries_result' %}" method="post">{% csrf_token %}
-    <label for="numeroEstudiante">Numero de Estudiantes: </label>
-    <input type="number" name="n_students_credits" min=1 value="10">    
-    <input type="submit" value="Consultar">
-    <input type="hidden" name="form-type" value="moreCredits"/>
-</form>
-
-
-<h2 class="title text-center"> Estudiantes con mas elementos creados </h2>
-<form action="{% url 'queries_result' %}" method="post">{% csrf_token %}
-    <label for="numeroEstudiante1">Numero de Estudiantes: </label>
-    <input type="number" name="n_students_elemCreated" min=1 value="10">
-    <input type="submit" value="Consultar">
-    <input type="hidden" name="form-type" value="moreElemCreated"/>
-</form>
-
-<h2 class="title text-center"> Elementos mas utilizados para realizar mezclas </h2>
-<form action="{% url 'queries_result' %}" method="post"> {%csrf_token%}
-    <label for="numeroElem1">Numero de Elementos: </label>
-    <input type="number" name="n_elements_basic" min=1 value="10">
-    <label for="subjectname1">Asignatura: </label>
-    <input type="text" name="subject_name">
-    <input type="submit" value="Consultar">
-    <input type="hidden" name="form-type" value="moreBasicElemUsed" />
-</form>
-
-
-<h2 class="title text-center"> Elementos mas valiosos de los elementos no basicos </h2>
-<form action="{% url 'queries_result' %}" method="post"> {%csrf_token%}
-    <label for="numeroElem2">Numero de Elementos: </label>
-    <input type="number" name="n_elements_noBasic" min=1 value="10">
-    <label for="subjectname2">Asignatura: </label>
-    <input type="text" name="subject_name">
-    <input type="submit" value="Consultar">
-    <input type="hidden" name="form-type" value="moreValNoBasicElem" />
-</form>
-
-<h2 class="title text-center"> Elementos mas valiosos de los elementos basicos </h2>
-<form action="{% url 'queries_result' %}" method="post"> {%csrf_token%}
-    <label for="numeroElem3">Numero de Elementos: </label>
-    <input type="number" name="n_elements_valbasic" min=1 value="10">
-    <label for="subjectname3">Asignatura: </label>
-    <input type="text" name="subject_name">
-    <input type="submit" value="Consultar">
-    <input type="hidden" name="form-type" value="moreValBasicElem" />
-</form>
-
-<h2 class="title text-center"> Elementos creados en el dia </h2>
-<form action="{% url 'queries_result' %}" method="post">{% csrf_token %}
-    <label for="day">Dia: </label>
-    <input type="number" name="day" min=1 max=31 value="1">
-    <input type="submit" value="Consultar">
-    <input type="hidden" name="form-type" value="elemCreatedDay" />
-</form>
-
-<h2 class="title text-center"> Elementos creados en el mes </h2>
-<form action="{% url 'queries_result' %}" method="post">{% csrf_token %}
-    <label for="team_name">Mes: </label>
-    <input type="number" name="month" min=1 max=12 value="1">
-    <input type="submit" value="Consultar">
-    <input type="hidden" name="form-type" value="elemCreatedMonth" />
-</form>
-
-<h2 class="title text-center"> Elementos creados en el año </h2>
-<form action="{% url 'queries_result' %}" method="post">{% csrf_token %}
-    <label for="year">Año: </label>
-    <input type="number" name="year" min=2000 value=2021>
-    <input type="submit" value="Consultar">
-    <input type="hidden" name="form-type" value="elemCreatedYear" />
-</form>
-
-<h2 class="title text-center"> Elementos creados en un intervalo de fechas </h2>
-<form action="{% url 'queries_result' %}" method="post">{% csrf_token %}
-    <label for="intervalDates">Fecha Inicial: </label>
-    <input type="date" name="initial_date">
-    <label for="intervalDates1">Fecha Final : </label>
-    <input type="date" name="final_date">
-    <input type="submit" value="Consultar">
-    <input type="hidden" name="form-type" value="elemCreatedDates" />
-</form>
-
-<h2 class="title text-center"> Ranking de estudiantes en una asignatura</h2>
-<form action="{% url 'queries_result' %}" method="post">{% csrf_token %}
-    <label for="numeroEstudiante2">Asignatura: </label>
-    <input type="text" name="subject_name">
-    <input type="submit" value="Consultar">
-    <input type="hidden" name="form-type" value="subjStudentsCredits" />
-</form>
-
-<h2 class="title text-center"> Estudiantes con mas creditos acumulados en una asignatura</h2>
-<form action="{% url 'queries_result' %}" method="post">{% csrf_token %}
-    <label for="numeroEstudiante6">Numero de estudiantes: </label>
-    <input type="number" name="n_students_subCredits" min=1 value="10">
-    <input type="text" name="subject_name">
-    <input type="submit" value="Consultar">
-    <input type="hidden" name="form-type" value="subjStudentsCreditsN" />
-
-<h2 class="title text-center"> Estudiante con mas creditos acumulados por cada asignatura</h2>
-<form action="{% url 'queries_result' %}" method="get">
-    <label for="mejorEstudiante"> Mejor estudiante por asignatura: </label>
-    <input type="submit" value="Consultar">
-</form>
-
-
-<h2 class="title text-center"> Ranking de estudiantes por creditos totales en un intervalo de fechas </h2>
-<form action="{% url 'queries_result' %}" method="post">{% csrf_token %}
-    <label for="intervalDates2">Fecha Inicial: </label>
-    <input type="date" name="initial_date">
-    <label for="intervalDates3">Fecha Final : </label>
-    <input type="date" name="final_date">
-    <input type="submit" value="Consultar">
-    <input type="hidden" name="form-type" value="rankingDatesTotalCredits" />
-</form>
-
-<h2 class="title text-center"> Ranking de estudiantes por creditos en una asignatura en un intervalo de fechas </h2>
-<form action="{% url 'queries_result' %}" method="post">{% csrf_token %}
-    <label for="intervalDates4">Fecha Inicial: </label>
-    <input type="date" name="initial_date">
-    <label for="intervalDates5">Fecha Final : </label>
-    <input type="date" name="final_date">
-    <label for="numeroEstudiante4">Asignatura: </label>
-    <input type="text" name="subject_name">
-    <input type="submit" value="Consultar">
-    <input type="hidden" name="form-type" value="rankingDatesSubjectCredits" />
-</form>
+</html>
