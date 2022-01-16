@@ -1,60 +1,46 @@
+{% extends "_base_template.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/w3.css' %}">
-    <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style_main_temp.css' %}">
-    <title>{{imparts.subject.name}} - {{imparts.professor.username}}</title>
-</head>
-<body>
+
+{%block title%}
+{{imparts.subject.name}} - {{imparts.professor.username}}
+{% endblock %}
+
+{% block content %}
 <div class="w3-sand w3-grayscale w3-large">
-    <div class="w3-container w3-center" id="about">
-        <div class="w3-content" style="max-width:70%">
-          <h2 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">{{imparts.subject.name}}</span></h4>
-          <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Solicitudes</span></h4>
-    
-    <table class="w3-table-all">
-        <thead>
-            <tr>
-                <th>Resultado</th>
-                <th>Elemento 1</th>
-                <th>Elemento 2</th>
-                <th>Justificación</th>
-                <th>Opción</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for request in requests %}
-            <tr>
-                <td>{{request.name}}</td>
-                <td>{{request.element1.name}}</td>
-                <td>{{request.element2.name}}</td>
-                <td>{{request.justification}}</td>               
-                <td>
-                <a class="w3-button w3-tag w3-dark-grey" href="{%url 'accept_element' request.id %}">Aceptar</a>
-                <a class="w3-button w3-tag w3-dark-grey" href="{%url 'reject_element' request.id %}">Rechazar</a>
-                </td>     
-            </tr>
-            {% endfor %}
-        </tbody>
-        </tbody>
-    </table>
-    
+    <div class="w3-content w3-padding-64">
+        <h2 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">{{imparts.subject.name}}</span></h4>
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Solicitudes</span></h4>
+        <table class="w3-table-all">
+            <thead>
+                <tr>
+                    <th>Resultado</th>
+                    <th>Elemento 1</th>
+                    <th>Elemento 2</th>
+                    <th>Justificación</th>
+                    <th>Opción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for request in requests %}
+                <tr>
+                    <td>{{request.name}}</td>
+                    <td>{{request.element1.name}}</td>
+                    <td>{{request.element2.name}}</td>
+                    <td>{{request.justification}}</td>               
+                    <td>
+                        <a class="w3-button w3-tag w3-dark-grey" href="{%url 'accept_element' request.id %}">Aceptar</a>
+                        <a class="w3-button w3-tag w3-dark-grey" href="{%url 'reject_element' request.id %}">Rechazar</a>
+                    </td>     
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <br> <br>
+        <div class="w3-content w3-center w3-padding-32" >
+            <a class="w3-button w3-tag w3-dark-grey" href={%url 'basic_elements' imparts.subject.id %}>Ver elementos básicos</a>
+        </div>
+    </div>
 </div>
-</div>
-<br> <br>
-<div class="w3-content w3-center" >
-    <a class="w3-button w3-tag w3-dark-grey" href={%url 'basic_elements' imparts.subject.id %}>Ver elementos básicos</a>
-</div>
-</div>
-
-<footer class="w3-center w3-light-grey w3-padding-48 w3-large">
-    <p>Powered by MATCOM</a></p>
-</footer>
-</body>
-
+{% endblock %}
 </html>

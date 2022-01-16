@@ -1,61 +1,50 @@
+{% extends "_base_template.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/w3.css' %}">
-    <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style_main_temp.css' %}">
-    <title>Estudiantes</title>
-</head>
-<body>
-<div class="w3-sand w3-grayscale w3-large">
-    <div class="w3-container w3-center" id="about">
-        <div class="w3-content" style="max-width:50%">
-          <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Administradores</span></h4>
-    
-    <table class="w3-table-all">
-        <thead>
-            <tr>
-                <th>Nombre de usuario</th>
-                <th>Nombre</th>
-                <th>Apellidos</th>
-                <th>Correo electrónico</th>
-                {% if perms.admins.delete_admin %}
-                    <th>Eliminar administrador</th>
-                {% endif %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for admin in object_list %}
-            <tr>
-                <td>{{admin.username}}</td>
-                <td>{{admin.first_name}}</td>
-                <td>{{admin.last_name}}</td>
-                <td>{{admin.email}}</td>
-                {% if perms.admins.delete_admin %}                    
-                    <td><a class="w3-button w3-tag w3-dark-grey" href="{% url 'delete_admin' admin.id %}">Eliminar</a></td>
-                {% endif %}
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    
-</div>
-</div>
-<br> <br>
-<div class="w3-content w3-center" >
-    {%if perms.admins.add_admin%}
-        <a class="w3-button w3-tag w3-dark-grey" href={%url 'register_admin'%}>Registrar nuevo administrador</a>
-    {%endif%}
-</div>
-</div>
 
-<footer class="w3-center w3-light-grey w3-padding-48 w3-large">
-    <p>Powered by MATCOM</a></p>
-</footer>
-</body>
+{%block title%}
+Administradores
+{% endblock %}
 
+{% block content %}
+<div class="w3-sand w3-grayscale w3-large" style="min-height: 100%;">
+    <div class="w3-content w3-padding-64" style="max-width:50%">
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Administradores</span></h4>
+    
+        <table class="w3-table-all">
+            <thead>
+                <tr>
+                    <th>Nombre de usuario</th>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Correo electrónico</th>
+                    {% if perms.admins.delete_admin %}
+                        <th>Eliminar administrador</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for admin in object_list %}
+                <tr>
+                    <td>{{admin.username}}</td>
+                    <td>{{admin.first_name}}</td>
+                    <td>{{admin.last_name}}</td>
+                    <td>{{admin.email}}</td>
+                    {% if perms.admins.delete_admin %}                    
+                        <td><a class="w3-button w3-tag w3-dark-grey" href="{% url 'delete_admin' admin.id %}">Eliminar</a></td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    
+
+        <br> <br>
+        <div class="w3-content w3-center" >
+            {%if perms.admins.add_admin%}
+            <a class="w3-button w3-tag w3-dark-grey" href={%url 'register_admin'%}>Registrar nuevo administrador</a>
+            {%endif%}
+        </div>
+    </div>
+</div>
+{% endblock %}
 </html>
