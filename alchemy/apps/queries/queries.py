@@ -94,7 +94,7 @@ class MoreElementsUsed(Query): #OK
         return context
 
 
-class MoreValuableNoBasicElements(Query): #Tiene un errorcito
+class MoreValuableNoBasicElements(Query): 
     def __init__(self, n, subject_name) -> None:
         self.n = n
         self.subject_name = subject_name
