@@ -37,10 +37,10 @@ class MoreElementsCreatedFactory(QueryFactory):
 
 class MoreBasicElementsUsedFactory(QueryFactory):
     def __init__(self):
-        self.name = "moreBasicElemUsed"
+        self.name = "moreElemUsed"
 
     def get_instance(self, data):
-        return MoreBasicElementsUsed(int(data["n_elements_basic"]), data["subject_name"])
+        return MoreElementsUsed(int(data["n_elements_basic"]), data["subject_name"])
 
 class MoreValuableNoBasicElementsFactory(QueryFactory):
     def __init__(self):

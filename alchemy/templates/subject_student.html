@@ -1,53 +1,54 @@
-<!-- This template of the HomePage is a child of MainTemplate -->
-{% extends "_main_template.html" %}
-
-<!-- Load static files -->
+{% extends "_base_template.html" %}
 {% load static %}
 
-<!-- Put title -->
 {%block title%}
 {{study.subject.name}} - {{study.student.username}}
 {% endblock %}
 
-<!-- Put content -->
 {% block content %}
-<header>
-    <h1>Bienvenido {{study.student.first_name}} a la asignatura {{study.subject.name}}</h1>
-</header>
+<div class="w3-sand w3-grayscale w3-large">
+    <div class="w3-content w3-padding-64" style="max-width:800px">
+        <h3 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Bienvenido {{study.student.first_name}} a la asignatura {{study.subject.name}}</span></h2>
+        <h4 class="w3-left "><span class=" w3-wide">Total de créditos obtenidos en todas las asignaturas: <u>{{study.student.credits}}</u></span></h4>
+        <br><br>
+        <h4 class="w3-left "><span class=" w3-wide">Créditos obtenidos en esta asignatura: <u>{{study.credits}}</u></span></h4>
+        <br><br>
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Profesores de la asignatura</span></h4>
+        <div class="w3-content" style="max-width:65%">
+            <table class="w3-table-all">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Correo electrónico</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for imp in imparts %}
+                    <tr>
+                        <td>{{imp.professor.first_name}}</td>
+                        <td>{{imp.professor.last_name}}</td>
+                        <td>{{imp.professor.email}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    
 
-<h2>Total de créditos obtenidos en todas las asignaturas: {{study.student.credits}}</h2>
+        <br> <br>
+        <h4 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">Opciones</span></h4>
+        <div class="w3-content w3-center">
+            <a class="w3-button w3-tag w3-dark-grey" href="{% url 'create_non_basic_element' study.subject.id %}">Crear elemento nuevo</a>
 
-<h2>Créditos obtenidos en esta asignatura: {{study.credits}}</h2>
+            <a class="w3-button w3-tag w3-dark-grey" href="{% url 'basic_elements' study.subject.id %}">Elementos básicos</a>
 
-<h2>Profesores de la asignatura</h2>
+            <a class="w3-button w3-tag w3-dark-grey" href="{% url 'accepted_list' study.subject.id %}">Elementos aceptados</a>
 
-    <table border="2">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Apellidos</th>
-                <th>Correo electrónico</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for imp in imparts %}
-            <tr>
-                <td>{{imp.professor.first_name}}</td>
-                <td>{{imp.professor.last_name}}</td>
-                <td>{{imp.professor.email}}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-<h2>Opciones</h2>
-
-<a href="{% url 'create_non_basic_element' study.subject.id %}">Crear elemento nuevo</a>
-
-<a href="{% url 'basic_elements' study.subject.id %}">Elementos básicos</a>
-
-<a href="{% url 'accepted_list' study.subject.id %}">Elementos aceptados</a>
-
-<a href="{% url 'pending_list' study.subject.id %}">Elementos pendientes</a>
-
+            <a class="w3-button w3-tag w3-dark-grey" href="{% url 'pending_list' study.subject.id %}">Elementos pendientes</a>
+        </div>
+    </div>
+</div>
 {% endblock %}
+
+</html>

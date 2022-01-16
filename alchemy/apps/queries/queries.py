@@ -44,18 +44,16 @@ class MoreElementsCreated(Query): #OK
         context["moreElemCreated"] = moreElemCreated
         return context
 
-class MoreBasicElementsUsed(Query): #OK
+class MoreElementsUsed(Query): #OK
     def __init__(self, n, subject_name):
         self.n = n
         self.subject_name = subject_name
     
     def execute(self, context):
-        moreBasicElemUsed = NonBasicElement.objects.all().select_related().filter(study__subject__name=self.subject_name).values('element1_id').annotate(cant_elem1=Count('element1_id'))[:self.n]
-        moreBasicElemUsed2 = NonBasicElement.objects.all().select_related().filter(study__subject__name=self.subject_name).values('element2_id').annotate(cant_elem2=Count('element2_id'))[:self.n]
-        list1 = list(moreBasicElemUsed)
-        list2 = list(moreBasicElemUsed2)
-        print("LISTAA 1 ", list1)
-        print("LISTAA 2 ", list2)
+        moreElemUsed = NonBasicElement.objects.all().select_related().filter(study__subject__name=self.subject_name).values('element1_id').annotate(cant_elem1=Count('element1_id'))[:self.n]
+        moreElemUsed2 = NonBasicElement.objects.all().select_related().filter(study__subject__name=self.subject_name).values('element2_id').annotate(cant_elem2=Count('element2_id'))[:self.n]
+        list1 = list(moreElemUsed)
+        list2 = list(moreElemUsed2)
 
         for i in range(len(list1)):
             id_elem1 = int(list1[i]['element1_id'])
@@ -75,17 +73,24 @@ class MoreBasicElementsUsed(Query): #OK
             new_elem = {'element1_id': elem['element2_id'], 'cant_elem1' : elem['cant_elem2']}
             list1.append(new_elem)
 
-        moreBasicElemUsed = list1
+        moreElemUsed = list1
 
-        for i in range(len(moreBasicElemUsed)):
-            id_elem = int(moreBasicElemUsed[i]['element1_id'])
-            elem = BasicElement.objects.get(id = id_elem)
-            moreBasicElemUsed[i]['name'] = elem.name
-            moreBasicElemUsed[i]['value'] = elem.value
-            moreBasicElemUsed[i]['subject'] = elem.imparts.subject.name
-
-        print(moreBasicElemUsed)
-        context["moreBasicElemUsed"] = moreBasicElemUsed
+        for i in range(len(moreElemUsed)):
+            id_elem = int(moreElemUsed[i]['element1_id'])
+            try:
+                elem = BasicElement.objects.get(id = id_elem)
+            except elem.DoesNotExist:
+                elem = None
+                
+            if elem is not None:
+                moreElemUsed[i]['name'] = elem.name
+                moreElemUsed[i]['value'] = elem.value
+            else:
+                elem = NonBasicElement.objects.get(id = id_elem)
+                moreElemUsed[i]['name'] = elem.name
+                moreElemUsed[i]['value'] = elem.value
+                
+        context["moreElemUsed"] = moreElemUsed
         return context
 
 
@@ -95,8 +100,9 @@ class MoreValuableNoBasicElements(Query): #Tiene un errorcito
         self.subject_name = subject_name
 
     def execute(self, context):
-        moreValNoBasicElem = NonBasicElement.objects.all().filter(study__subject__name= self.subject_name).order_by('value').reverse()[:self.n]
+        moreValNoBasicElem = NonBasicElement.objects.all().filter(study__subject__name= self.subject_name).order_by('value').reverse().distinct()[:self.n]
         context["moreValNoBasicElem"] = moreValNoBasicElem
+        print(moreValNoBasicElem.query)
         return context
 
 
@@ -106,7 +112,7 @@ class MoreValuableBasicElements(Query): #OK
         self.subject_name = subject_name
 
     def execute(self, context):
-        moreValBasicElem = BasicElement.objects.all().filter(imparts__subject__name= self.subject_name).order_by('value').reverse()[:self.n]
+        moreValBasicElem = BasicElement.objects.all().filter(imparts__subject__name= self.subject_name).order_by('value').reverse().distinct()[:self.n]
         context["moreValNoBasicElem"] = moreValBasicElem
         return context
 

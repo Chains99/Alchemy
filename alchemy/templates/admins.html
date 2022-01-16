@@ -1,46 +1,50 @@
-<!-- This template of the HomePage is a child of MainTemplate -->
-{% extends "_main_template.html" %}
-
-<!-- Load static files -->
+{% extends "_base_template.html" %}
 {% load static %}
 
-<!-- Put title -->
 {%block title%}
 Administradores
 {% endblock %}
 
-<!-- Put content -->
 {% block content %}
-    <header>
-        <h1>Administradores</h1>
-    </header>
-    <table border="2">
-        <thead>
-            <tr>
-                <th>Nombre de usuario</th>
-                <th>Nombre</th>
-                <th>Apellidos</th>
-                <th>Correo electrónico</th>
-                {% if perms.admins.delete_admin %}
-                    <th>Eliminar administrador</th>
-                {% endif %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for admin in object_list %}
-            <tr>
-                <td>{{admin.username}}</td>
-                <td>{{admin.first_name}}</td>
-                <td>{{admin.last_name}}</td>
-                <td>{{admin.email}}</td>
-                {% if perms.admins.delete_admin %}                    
-                    <td><a href="{% url 'delete_admin' admin.id %}">Eliminar</a></td>
-                {% endif %}
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {%if perms.admins.add_admin%}
-        <a href={%url 'register_admin'%}>Registrar nuevo administrador</a>
-    {%endif%}
+<div class="w3-sand w3-grayscale w3-large" style="min-height: 100%;">
+    <div class="w3-content w3-padding-64" style="max-width:50%">
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Administradores</span></h4>
+    
+        <table class="w3-table-all">
+            <thead>
+                <tr>
+                    <th>Nombre de usuario</th>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Correo electrónico</th>
+                    {% if perms.admins.delete_admin %}
+                        <th>Eliminar administrador</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for admin in object_list %}
+                <tr>
+                    <td>{{admin.username}}</td>
+                    <td>{{admin.first_name}}</td>
+                    <td>{{admin.last_name}}</td>
+                    <td>{{admin.email}}</td>
+                    {% if perms.admins.delete_admin %}                    
+                        <td><a class="w3-button w3-tag w3-dark-grey" href="{% url 'delete_admin' admin.id %}">Eliminar</a></td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    
+
+        <br> <br>
+        <div class="w3-content w3-center" >
+            {%if perms.admins.add_admin%}
+            <a class="w3-button w3-tag w3-dark-grey" href={%url 'register_admin'%}>Registrar nuevo administrador</a>
+            {%endif%}
+        </div>
+    </div>
+</div>
 {% endblock %}
+</html>

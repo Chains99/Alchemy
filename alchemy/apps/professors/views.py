@@ -62,5 +62,5 @@ class ProfessorDelete(PermissionRequiredMixin,DeleteView):
     model=Professor
     template_name='delete_user.html'
     success_url=reverse_lazy('professors')
-    permission_required='professors.delete_profesor'
+    permission_required='professors.delete_professor'
     permission_denied_message='Acceso denegado. Usuario no autorizado'
