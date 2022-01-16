@@ -14,7 +14,7 @@ class MoreElementsCreatedForm(Form):
     n_students_elemCreated = forms.IntegerField(min_value=1, required=True, initial=10)
 
 #Mostrar los n elementos mas utilizados por los estudiantes para realizar mezclas.
-class MoreBasicElementsUsedForm(Form):
+class MoreElementsUsedForm(Form):
     n_elements_basic = forms.IntegerField(min_value=1, required=True, initial=10)
     subject_name = forms.ChoiceField(choices=subjects,label="Nombre de la asignatura", required=True)
 

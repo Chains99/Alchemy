@@ -64,7 +64,7 @@
     </body>
 
     <body>
-        {%if moreBasicElemUsed%}
+        {%if moreElemUsed%}
         <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Elementos más utilizados para realizar mezclas</span></h4>
         <table class="w3-table-all">
             <thead>
@@ -72,16 +72,14 @@
                     <th>Nombre</th>
                     <th>Cantidad</th>
                     <th>Valor</th>
-                    <th>Asignatura</th>
                 </tr>
             </thead>
             <tbody>
-                {%for elem in moreBasicElemUsed%}
+                {%for elem in moreElemUsed%}
                 <tr>
                     <td>{{elem.name}}</td>
                     <td>{{elem.cant_elem1}}</td>
                     <td>{{elem.value}}</td>
-                    <td>{{elem.subject}}</td>
                 </tr>
                 {%endfor%}
             </tbody>
@@ -91,7 +89,7 @@
 
     <body>
         {%if moreValNoBasicElem%}
-        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Elementos más utilizados para realizar mezclas</span></h4>
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Elementos más valiosos de los elementos no básicos</span></h4>
         <table class="w3-table-all">
             <thead>
                 <tr>
