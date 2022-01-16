@@ -19,24 +19,26 @@
                         {{form.non_field_errors }}
                         {{form.name.errors}}
                         <label style="font-size: 21px;" for="{{form.name.id_for_label}}">{{form.name.label}}</label>
-                        <input class="w3-input w3-padding-16 w3-border" type="text" id='{{ form.name.id_for_label }}"' name="{{ form.name.html_name }}" placeholder="Nombre" {% if not form.name.value is None %} value="{{form.name.value}}" {% endif %}>
-                        <br><br>
+                        <input class="w3-input w3-padding-16 w3-border" type="text" id='{{ form.name.id_for_label }}' name="{{ form.name.html_name }}" placeholder="Nombre" {% if not form.name.value is None %} value="{{form.name.value}}" {% endif %}>
+                        {{form.element1.errors}}
                         <label style="font-size: 21px;" for="{{form.element1.id_for_label}}">{{form.element1.label}}</label>
-                        <select name="form.element1" id=""></select>
-                        {%  for basic_element in basic_elements %}
-                        <option value="{{basic_element}}"></option>
-                        {% endfor %}
-                        <br><br>
+                        <select class="w3-input w3-padding-16 w3-border" name="{{form.element1.html_name}}">
+                            {% for id,name in basic_elements %}
+                                <option value="{{id}}">{{name}}</option>
+                            {% endfor %}
+                        </select>
+                        {{form.element2.errors}}
                         <label style="font-size: 21px;" for="{{form.element2.id_for_label}}">{{form.element2.label}}</label>
-                        <select name="form.element2.name" id=""></select>
-                        {% for element in basic_elements %}
-                        <option value="{{element.name}}"></option>
+                        <select class="w3-input w3-padding-16 w3-border" name="{{form.element2.html_name}}">
+                        {% for id,name in basic_elements %}
+                            <option value="{{id}}">{{name}}</option>
                         {% endfor %}
-                        <br><br>
+                        </select>
+                        {{form.justification.errors}}
                         <label style="font-size: 21px;" for="{{form.justification.id_for_label}}">{{form.justification.label}}</label>
                         <input class="w3-input w3-padding-16 w3-border" type="text" id='{{ form.justification.id_for_label }}"' name="{{ form.justification.html_name }}" placeholder="Justificación" {% if not form.justification.value is None %} value="{{form.justification.value}}" {% endif %}>       
                         <div class="w3-padding-32">
-                            <button class="w3-button w3-tag w3-dark-grey" type="submit">Crear o Editar</button>
+                            <button class="w3-button w3-tag w3-dark-grey" type="submit">Crear o Editar</button> 
                         </div>
                     </form>
                 </div> 

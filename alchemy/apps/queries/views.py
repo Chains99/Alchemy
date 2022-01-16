@@ -5,10 +5,15 @@ from apps.queries.forms import *
 from apps.queries.queries_factory import *
 from django.urls import reverse_lazy
 from django.http import *
+from apps.subjects.models import Subject
 
+_subjects=Subject.objects.all()
+subjects=[(s.name,s.name) for s in _subjects]
 
 def queries_render(request):
-    return render(request, "queries.html")
+    context = {
+        'subjects': subjects}
+    return render(request, "queries.html",context=context)
 
 
 def queries_result_render(request):
