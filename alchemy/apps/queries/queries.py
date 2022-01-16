@@ -18,7 +18,7 @@ class Query(metaclass=ABCMeta):
     def execute(self, context):
         pass
 
-class MoreCredits(Query): #OK
+class MoreCredits(Query):
     def __init__(self, n) -> None:
         self.n = n
 
@@ -27,7 +27,7 @@ class MoreCredits(Query): #OK
         context["moreCredits"] = moreCredits
         return context
 
-class MoreElementsCreated(Query): #OK
+class MoreElementsCreated(Query):
     def __init__(self, n) -> None:
         self.n = n
 
@@ -44,7 +44,7 @@ class MoreElementsCreated(Query): #OK
         context["moreElemCreated"] = moreElemCreated
         return context
 
-class MoreElementsUsed(Query): #OK
+class MoreElementsUsed(Query):
     def __init__(self, n, subject_name):
         self.n = n
         self.subject_name = subject_name
@@ -106,7 +106,7 @@ class MoreValuableNoBasicElements(Query):
         return context
 
 
-class MoreValuableBasicElements(Query): #OK
+class MoreValuableBasicElements(Query):
     def __init__(self, n, subject_name) -> None:
         self.n = n
         self.subject_name = subject_name
@@ -117,7 +117,7 @@ class MoreValuableBasicElements(Query): #OK
         return context
 
 
-class ElementsCreatedByDay(Query): #OK
+class ElementsCreatedByDay(Query):
     def __init__(self, day) -> None:
         self.day = day
 
@@ -127,7 +127,7 @@ class ElementsCreatedByDay(Query): #OK
         return context
 
 
-class ElementsCreatedByMonth(Query): #OK
+class ElementsCreatedByMonth(Query):
     def __init__(self, month) -> None:
         self.month = month
 
@@ -136,7 +136,7 @@ class ElementsCreatedByMonth(Query): #OK
         context["elemCreatedDay"] = elemCreatedMonth
         return context
 
-class ElementsCreatedByYear(Query): #OK
+class ElementsCreatedByYear(Query):
     def __init__(self, year) -> None:
         self.year = year
 
@@ -145,7 +145,7 @@ class ElementsCreatedByYear(Query): #OK
         context["elemCreatedDay"] = elemCreatedYear
         return context
 
-class ElementsCreatedDates(Query): #OK
+class ElementsCreatedDates(Query):
     def __init__(self, initial_date, final_date) -> None:
         self.initial_date = initial_date
         self.final_date = final_date
@@ -155,7 +155,7 @@ class ElementsCreatedDates(Query): #OK
         context["elemCreatedDates"] = elemCreatedDates
         return context
 
-class SubjectStudentsCredits(Query): #OK
+class SubjectStudentsCredits(Query):
     def __init__(self, subject_name) -> None:
         self.subject_name = subject_name
 
@@ -170,7 +170,7 @@ class SubjectStudentsCredits(Query): #OK
         context["subjStudentsCredits"] = subjStudentsCredits
         return context
 
-class SubjectStudentsCreditsN(Query): #OK
+class SubjectStudentsCreditsN(Query):
     def __init__(self, n, subject_name) -> None:
         self.n = n
         self.subject_name = subject_name
@@ -186,7 +186,7 @@ class SubjectStudentsCreditsN(Query): #OK
         context["subjStudentsCreditsN"] = subjStudentsCredits
         return context
 
-class BestStudentBySubject(Query): #OK
+class BestStudentBySubject(Query):
     def execute(self, context):
         subjects = list(Subject.objects.all())
         bestStudentBySubj = []
