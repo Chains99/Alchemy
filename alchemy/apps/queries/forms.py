@@ -32,7 +32,7 @@ class ElementsCreatedByYearForm(Form):
     year = forms.IntegerField(min_value=1, required=True, initial=10)
 
 #Dado un intervalo de fechas: mostrar los elementos creados en ese intervalo.
-class ElementsCreatedDates:
+class ElementsCreatedDatesForm:
     initial_date = forms.DateField(required=True)
     final_date = forms.DateField(required=True)
 
@@ -51,7 +51,7 @@ class RankingByDatesTotalCreditsForm(Form):
     final_date = forms.DateField(required=True)
 
 #Dado un intervalo de fechas y una asignatura mostrar el ranking de los estudiantes (por creditos de la asignatura)
-class RankingByDatesSubjectCredits(Form):
+class RankingByDatesSubjectCreditsForm(Form):
     initial_date = forms.DateField(required=True)
     final_date = forms.DateField(required=True)
     subject_name = forms.ChoiceField(choices=subjects,label="Nombre de la asignatura", required=True)

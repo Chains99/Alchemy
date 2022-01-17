@@ -24,7 +24,7 @@ class MoreCredits(Query):
 
     def execute(self, context):
         moreCredits = Student.objects.all().order_by('credits').reverse()[:self.n]
-        context["moreCredits"] = moreCredits
+        context["moreCreditsq"] = moreCredits
         return context
 
 class MoreElementsCreated(Query):
@@ -41,7 +41,7 @@ class MoreElementsCreated(Query):
             moreElemCreated[i]['lastname'] = student.last_name
             moreElemCreated[i]['credits'] = student.credits
 
-        context["moreElemCreated"] = moreElemCreated
+        context["moreElemCreatedq"] = moreElemCreated
         return context
 
 class MoreElementsUsed(Query):
@@ -90,9 +90,8 @@ class MoreElementsUsed(Query):
                 moreElemUsed[i]['name'] = elem.name
                 moreElemUsed[i]['value'] = elem.value
                 
-        context["moreElemUsed"] = moreElemUsed
+        context["moreElemUsedq"] = moreElemUsed
         return context
-
 
 class MoreValuableNoBasicElements(Query): 
     def __init__(self, n, subject_name) -> None:
@@ -101,10 +100,8 @@ class MoreValuableNoBasicElements(Query):
 
     def execute(self, context):
         moreValNoBasicElem = NonBasicElement.objects.all().filter(study__subject__name= self.subject_name).order_by('value').reverse().distinct()[:self.n]
-        context["moreValNoBasicElem"] = moreValNoBasicElem
-        print(moreValNoBasicElem.query)
+        context["moreValNoBasicElemq"] = moreValNoBasicElem
         return context
-
 
 class MoreValuableBasicElements(Query):
     def __init__(self, n, subject_name) -> None:
@@ -113,7 +110,7 @@ class MoreValuableBasicElements(Query):
 
     def execute(self, context):
         moreValBasicElem = BasicElement.objects.all().filter(imparts__subject__name= self.subject_name, visible=True).order_by('value').reverse().distinct()[:self.n]
-        context["moreValNoBasicElem"] = moreValBasicElem
+        context["moreValBasicElemq"] = moreValBasicElem
         return context
 
 class ElementsCreatedByYear(Query):
@@ -122,7 +119,7 @@ class ElementsCreatedByYear(Query):
 
     def execute(self, context):
         elemCreatedYear = NonBasicElement.objects.filter(date_time_creation__year=str(self.year))
-        context["elemCreatedDay"] = elemCreatedYear
+        context["elemCreatedYearq"] = elemCreatedYear
         return context
 
 class ElementsCreatedDates(Query):
@@ -132,7 +129,7 @@ class ElementsCreatedDates(Query):
 
     def execute(self, context):
         elemCreatedDates = NonBasicElement.objects.filter(date_time_creation__range=[self.initial_date, self.final_date])
-        context["elemCreatedDates"] = elemCreatedDates
+        context["elemCreatedDatesq"] = elemCreatedDates
         return context
 
 class SubjectStudentsCredits(Query):
@@ -147,7 +144,7 @@ class SubjectStudentsCredits(Query):
             student = Student.objects.get(username = elem.student)
             subjStudentsCredits.append({'firstname':student.first_name, 'lastname':student.last_name, 'credits': elem.credits})
         
-        context["subjStudentsCredits"] = subjStudentsCredits
+        context["subjStudentsCreditsq"] = subjStudentsCredits
         return context
 
 class SubjectStudentsCreditsN(Query):
@@ -163,7 +160,7 @@ class SubjectStudentsCreditsN(Query):
             student = Student.objects.get(username = elem.student)
             subjStudentsCredits.append({'firstname':student.first_name, 'lastname':student.last_name, 'credits': elem.credits})
         
-        context["subjStudentsCreditsN"] = subjStudentsCredits
+        context["subjStudentsCreditsNq"] = subjStudentsCredits
         return context
 
 class BestStudentBySubject(Query):
@@ -178,7 +175,7 @@ class BestStudentBySubject(Query):
             bestStudentBySubj.append({'firstname':student.first_name, 'lastname':student.last_name, 'credits': elem.credits, 'subject':subject_name})
 
         print(bestStudentBySubj)
-        context["bestStudentBySubj"] = bestStudentBySubj
+        context["bestStudentBySubjq"] = bestStudentBySubj
         return context
 
 class RankingByDatesTotalCredits(Query):
@@ -195,7 +192,7 @@ class RankingByDatesTotalCredits(Query):
             rankingDates[i]['first_name'] = student.first_name
             rankingDates[i]['last_name'] = student.last_name
         print(rankingDates)        
-        context["rankingDatesTotalCredits"] = rankingDates
+        context["rankingDatesTotalCreditsq"] = rankingDates
         return context
 
 class RankingByDatesSubjectCredits(Query):
@@ -213,5 +210,5 @@ class RankingByDatesSubjectCredits(Query):
             rankingDates[i]['first_name'] = student.first_name
             rankingDates[i]['last_name'] = student.last_name
         print(rankingDates)        
-        context["rankingDatesSubjectCredits"] = rankingDates
+        context["rankingDatesSubjectCreditsq"] = rankingDates
         return context
