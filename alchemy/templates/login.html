@@ -13,11 +13,11 @@ Iniciar Sesión
                 <form method="post"> {% csrf_token %}
                     {{form.non_field_errors }}
                     {{form.username.errors}}
-                    <label style="font-size: 21px;" for="{{form.username.id_for_label}}">{{form.username.label}}</label>
+                    <label style="font-size: 21px;" for="{{form.username.id_for_label}}">Nombre de Usuario</label>
                     <input class="w3-input w3-padding-16 w3-border" type="text" id='{{ form.username.id_for_label }}"' name="{{ form.username.html_name }}" placeholder="Nombre de usuario" autocomplete="username">
                     <br><br>
                     {{form.password.errors}}
-                    <label style="font-size: 21px;" for="{{form.password.id_for_label}}">{{form.password.label}}</label>
+                    <label style="font-size: 21px;" for="{{form.password.id_for_label}}">Contraseña</label>
                     <input class="w3-input w3-padding-16 w3-border" type="password" id='{{ form.password.id_for_label }}"' name="{{ form.password.html_name }}" placeholder="Contraseña" autocomplete="current-password">
                     <div class="w3-padding-32">
                         <button class="w3-button w3-tag w3-dark-grey" type="submit">Iniciar Sesión</button>
