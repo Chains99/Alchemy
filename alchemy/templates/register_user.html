@@ -6,7 +6,7 @@ Registro
 {% endblock %}
 
 {% block content %}
-<div class="w3-sand w3-grayscale w3-large">
+<div class="w3-sand w3-grayscale w3-large" style="min-height: 100%;">
     <div class="w3-container w3-center w3-padding-64" >
         <div class="w3-content w3-padding-64" style="max-width:550px">
             <div class="w3-row w3-center w3-card w3-padding">
@@ -22,7 +22,7 @@ Registro
                     <br><br>
                     {{form.last_name.errors}}
                     <label style="font-size: 21px;" for="{{form.last_name.id_for_label}}">{{form.last_name.label}}</label>
-                    <input class="w3-input w3-padding-16 w3-border" type="text" id='{{ form.last_name.id_for_label }}"' name="{{ form.last_name.html_name }}" placeholder="Aplellidos" {% if not form.last_name.value is None %} value="{{form.last_name.value}}" {% endif %}>
+                    <input class="w3-input w3-padding-16 w3-border" type="text" id='{{ form.last_name.id_for_label }}"' name="{{ form.last_name.html_name }}" placeholder="Apellidos" {% if not form.last_name.value is None %} value="{{form.last_name.value}}" {% endif %}>
                     <br><br>
                     {{form.email.errors}}
                     <label style="font-size: 21px;" for="{{form.email.id_for_label}}">{{form.email.label}}</label>

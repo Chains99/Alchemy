@@ -16,8 +16,7 @@ Crear o editar asignatura
                     <label style="font-size: 21px;" for="{{form.name.id_for_label}}">{{form.name.label}}</label>
                     <input class="w3-input w3-padding-16 w3-border" type="text" id='{{ form.name.id_for_label }}"' name="{{ form.name.html_name }}" placeholder="Nombre" {% if not form.name.value is None %} value="{{form.name.value}}" {% endif %}>
                     <div class="w3-padding-32">
-                        <button class="w3-button w3-tag w3-dark-grey" type="submit">Confirmar</button>
-                        <a class="w3-button w3-tag w3-dark-grey" href={%url 'subjects' %}>Cancelar</a>
+                        <button class="w3-button w3-tag w3-dark-grey" type="submit">Crear o Editar</button>
                     </div>
                 </form>
             </div> 
