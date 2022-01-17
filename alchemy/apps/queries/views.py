@@ -23,7 +23,8 @@ def queries_result_render(request):
     if request.method == "POST":
         factory = get_factory()
         instance = factory[request.POST["form-type"]].get_instance(request.POST)
-        context = instance.execute(context)
+        if instance is not None:
+            context = instance.execute(context)
     else:
         context = BestStudentBySubject().execute(context)
 

@@ -25,14 +25,20 @@ class MoreCreditsFactory(QueryFactory):
         self.name = "moreCredits"
     
     def get_instance(self, data):
-        return MoreCredits(int(data["n_students_credits"]))
+        n = data["n_students_credits"]
+        if n != "":
+            return MoreCredits(int(n))
+        return None
 
 class MoreElementsCreatedFactory(QueryFactory):
     def __init__(self):
         self.name = "moreElemCreated"
     
     def get_instance(self, data):
-        return MoreElementsCreated(int(data["n_students_elemCreated"]))
+        n = data["n_students_elemCreated"]
+        if n != "":
+            return MoreElementsCreated(int(n))
+        return None
 
 
 class MoreBasicElementsUsedFactory(QueryFactory):
@@ -40,7 +46,11 @@ class MoreBasicElementsUsedFactory(QueryFactory):
         self.name = "moreElemUsed"
 
     def get_instance(self, data):
-        return MoreElementsUsed(int(data["n_elements_basic"]), data["subject_name"])
+        n = data["n_elements_basic"]
+        s = data["subject_name"]
+        if n != "" and s != "":
+            return MoreElementsUsed(int(n), s)
+        return None
 
 class MoreValuableNoBasicElementsFactory(QueryFactory):
     def __init__(self):
@@ -54,14 +64,21 @@ class MoreValuableBasicElementsFactory(QueryFactory):
         self.name = 'moreValBasicElem'
     
     def get_instance(self, data):
-        return MoreValuableBasicElements(int(data['n_elements_valbasic']), data["subject_name"])
+        n = data['n_elements_valbasic']
+        s = data["subject_name"]
+        if n != "" and s != "":
+            return MoreValuableBasicElements(int(n), s)
+        return None
 
 class ElementsCreatedByDayFactory(QueryFactory):
     def __init__(self):
         self.name = "elemCreatedDay"
     
     def get_instance(self, data):
-        return ElementsCreatedByDay(int(data["day"]))
+        n = data["day"]
+        if n != "":
+            return ElementsCreatedByDay(int(n))
+        return None
 
 
 class ElementsCreatedByMonthFactory(QueryFactory):
@@ -69,14 +86,20 @@ class ElementsCreatedByMonthFactory(QueryFactory):
         self.name = "elemCreatedMonth"
     
     def get_instance(self, data):
-        return ElementsCreatedByMonth(int(data["month"]))
+        n = data["month"]
+        if n != "":
+            return ElementsCreatedByMonth(int(n))
+        return None
 
 class ElementsCreatedByYearFactory(QueryFactory):
     def __init__(self):
         self.name = "elemCreatedYear"
     
     def get_instance(self, data):
-        return ElementsCreatedByYear(int(data["year"]))
+        n = data["year"]
+        if n != "":
+            return ElementsCreatedByYear(int(n))
+        return None
 
 
 class ElementsCreatedDatesFactory(QueryFactory):
@@ -84,7 +107,11 @@ class ElementsCreatedDatesFactory(QueryFactory):
         self.name = "elemCreatedDates"
 
     def get_instance(self, data):
-        return ElementsCreatedDates(data["initial_date"], data["final_date"])
+        i = data["initial_date"]
+        f = data["final_date"]
+        if i != "" and f != "":
+            return ElementsCreatedDates(i, f)
+        return None
 
 class SubjectStudentsCreditsFactory(QueryFactory):
     def __init__(self):

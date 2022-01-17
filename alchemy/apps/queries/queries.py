@@ -112,7 +112,7 @@ class MoreValuableBasicElements(Query):
         self.subject_name = subject_name
 
     def execute(self, context):
-        moreValBasicElem = BasicElement.objects.all().filter(imparts__subject__name= self.subject_name).order_by('value').reverse().distinct()[:self.n]
+        moreValBasicElem = BasicElement.objects.all().filter(imparts__subject__name= self.subject_name, visible=True).order_by('value').reverse().distinct()[:self.n]
         context["moreValNoBasicElem"] = moreValBasicElem
         return context
 
