@@ -18,14 +18,30 @@ def queries_render(request):
 
 def queries_result_render(request):
 
-    context = {}
+    context = {
+        "moreCredits" : MoreCreditsForm,
+        "moreElemCreated" : MoreElementsCreatedForm,
+        "moreElemUsed" : MoreElementsUsedForm,
+        "moreValNoBasicElem" : MoreValuableNoBasicElementsForm,
+        "moreValBasicElem" : MoreValuableBasicElementsForm,
+        "elemCreatedYear" : ElementsCreatedByYearForm,
+        "elemCreatedDates" : ElementsCreatedDatesForm,
+        "subjStudentsCredits" : SubjectStudentsCreditsForm,
+        "rankingDatesTotalCredits" : RankingByDatesTotalCreditsForm,
+        "rankingDatesSubjectCredits" : RankingByDatesSubjectCreditsForm
+    }
 
     if request.method == "POST":
         factory = get_factory()
         instance = factory[request.POST["form-type"]].get_instance(request.POST)
         if instance is not None:
             context = instance.execute(context)
+            print("CONTEXT",context)
     else:
         context = BestStudentBySubject().execute(context)
 
     return render(request, "queries_result.html", context=context)
+
+    # if request.method == 'POST':
+        # cont_data = HandlerForm().handle(request.POST, cont_data)
+    # return render(request, "consultas.html", context=cont_data)
