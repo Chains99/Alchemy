@@ -28,13 +28,6 @@ class MoreValuableBasicElementsForm(Form):
     n_elements_valbasic = forms.IntegerField(min_value=1, required=True, initial=10)
     subject_name = forms.ChoiceField(choices=subjects,label="Nombre de la asignatura", required=True)
 
-#Dado un mes, un año o un dia: mostrar los elementos creados
-class ElementsCreatedByDayForm(Form):
-    day = forms.IntegerField(min_value=1, required=True, initial=10)
-
-class ElementsCreatedByMonthForm(Form):
-    month = forms.IntegerField(min_value=1, required=True, initial=10)
-
 class ElementsCreatedByYearForm(Form):
     year = forms.IntegerField(min_value=1, required=True, initial=10)
 

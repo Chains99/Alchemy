@@ -116,26 +116,6 @@ class MoreValuableBasicElements(Query):
         context["moreValNoBasicElem"] = moreValBasicElem
         return context
 
-
-class ElementsCreatedByDay(Query):
-    def __init__(self, day) -> None:
-        self.day = day
-
-    def execute(self, context):
-        elemCreatedDay = NonBasicElement.objects.filter(date_time_creation__day=str(self.day))
-        context["elemCreatedDay"] = elemCreatedDay
-        return context
-
-
-class ElementsCreatedByMonth(Query):
-    def __init__(self, month) -> None:
-        self.month = month
-
-    def execute(self, context):
-        elemCreatedMonth = NonBasicElement.objects.filter(date_time_creation__month=str(self.month))
-        context["elemCreatedDay"] = elemCreatedMonth
-        return context
-
 class ElementsCreatedByYear(Query):
     def __init__(self, year) -> None:
         self.year = year

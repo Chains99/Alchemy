@@ -70,27 +70,6 @@ class MoreValuableBasicElementsFactory(QueryFactory):
             return MoreValuableBasicElements(int(n), s)
         return None
 
-class ElementsCreatedByDayFactory(QueryFactory):
-    def __init__(self):
-        self.name = "elemCreatedDay"
-    
-    def get_instance(self, data):
-        n = data["day"]
-        if n != "":
-            return ElementsCreatedByDay(int(n))
-        return None
-
-
-class ElementsCreatedByMonthFactory(QueryFactory):
-    def __init__(self):
-        self.name = "elemCreatedMonth"
-    
-    def get_instance(self, data):
-        n = data["month"]
-        if n != "":
-            return ElementsCreatedByMonth(int(n))
-        return None
-
 class ElementsCreatedByYearFactory(QueryFactory):
     def __init__(self):
         self.name = "elemCreatedYear"
