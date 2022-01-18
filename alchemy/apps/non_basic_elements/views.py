@@ -46,13 +46,15 @@ def create_non_basic_element(request,pk):
         
     if request.method=='GET':
         form=create_form(request, choices)
-        contexto={
-            'form':form
+        context={
+            'form':form,
+            'basic_elements':choices
         }
     else:
         form=create_form(request, choices)
-        contexto={
-            'form':form
+        context={
+            'form':form,
+            'basic_elements':choices
         }
         if form.is_valid():
             non_basic_element=NonBasicElement()
@@ -66,7 +68,7 @@ def create_non_basic_element(request,pk):
             non_basic_element.save()
             return redirect('subject_student',pk=pk)
 
-    return render(request,'create_non_basic_element.html',contexto)
+    return render(request,'create_non_basic_element.html',context)
 
 @permission_required('non_basic_elements.delete_nonbasicelement')
 def delete_non_basic_element(request,pk):

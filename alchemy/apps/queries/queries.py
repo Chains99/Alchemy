@@ -18,7 +18,7 @@ class Query(metaclass=ABCMeta):
     def execute(self, context):
         pass
 
-class MoreCredits(Query): #OK
+class MoreCredits(Query):
     def __init__(self, n) -> None:
         self.n = n
 
@@ -27,7 +27,7 @@ class MoreCredits(Query): #OK
         context["moreCredits"] = moreCredits
         return context
 
-class MoreElementsCreated(Query): #OK
+class MoreElementsCreated(Query):
     def __init__(self, n) -> None:
         self.n = n
 
@@ -44,18 +44,16 @@ class MoreElementsCreated(Query): #OK
         context["moreElemCreated"] = moreElemCreated
         return context
 
-class MoreBasicElementsUsed(Query): #OK
+class MoreElementsUsed(Query):
     def __init__(self, n, subject_name):
         self.n = n
         self.subject_name = subject_name
     
     def execute(self, context):
-        moreBasicElemUsed = NonBasicElement.objects.all().select_related().filter(study__subject__name=self.subject_name).values('element1_id').annotate(cant_elem1=Count('element1_id'))[:self.n]
-        moreBasicElemUsed2 = NonBasicElement.objects.all().select_related().filter(study__subject__name=self.subject_name).values('element2_id').annotate(cant_elem2=Count('element2_id'))[:self.n]
-        list1 = list(moreBasicElemUsed)
-        list2 = list(moreBasicElemUsed2)
-        print("LISTAA 1 ", list1)
-        print("LISTAA 2 ", list2)
+        moreElemUsed = NonBasicElement.objects.all().select_related().filter(study__subject__name=self.subject_name).values('element1_id').annotate(cant_elem1=Count('element1_id'))[:self.n]
+        moreElemUsed2 = NonBasicElement.objects.all().select_related().filter(study__subject__name=self.subject_name).values('element2_id').annotate(cant_elem2=Count('element2_id'))[:self.n]
+        list1 = list(moreElemUsed)
+        list2 = list(moreElemUsed2)
 
         for i in range(len(list1)):
             id_elem1 = int(list1[i]['element1_id'])
@@ -75,43 +73,51 @@ class MoreBasicElementsUsed(Query): #OK
             new_elem = {'element1_id': elem['element2_id'], 'cant_elem1' : elem['cant_elem2']}
             list1.append(new_elem)
 
-        moreBasicElemUsed = list1
+        moreElemUsed = list1
 
-        for i in range(len(moreBasicElemUsed)):
-            id_elem = int(moreBasicElemUsed[i]['element1_id'])
-            elem = BasicElement.objects.get(id = id_elem)
-            moreBasicElemUsed[i]['name'] = elem.name
-            moreBasicElemUsed[i]['value'] = elem.value
-            moreBasicElemUsed[i]['subject'] = elem.imparts.subject.name
-
-        print(moreBasicElemUsed)
-        context["moreBasicElemUsed"] = moreBasicElemUsed
+        for i in range(len(moreElemUsed)):
+            id_elem = int(moreElemUsed[i]['element1_id'])
+            try:
+                elem = BasicElement.objects.get(id = id_elem)
+            except elem.DoesNotExist:
+                elem = None
+                
+            if elem is not None:
+                moreElemUsed[i]['name'] = elem.name
+                moreElemUsed[i]['value'] = elem.value
+            else:
+                elem = NonBasicElement.objects.get(id = id_elem)
+                moreElemUsed[i]['name'] = elem.name
+                moreElemUsed[i]['value'] = elem.value
+                
+        context["moreElemUsed"] = moreElemUsed
         return context
 
 
-class MoreValuableNoBasicElements(Query): #Tiene un errorcito
+class MoreValuableNoBasicElements(Query): 
     def __init__(self, n, subject_name) -> None:
         self.n = n
         self.subject_name = subject_name
 
     def execute(self, context):
-        moreValNoBasicElem = NonBasicElement.objects.all().filter(study__subject__name= self.subject_name).order_by('value').reverse()[:self.n]
+        moreValNoBasicElem = NonBasicElement.objects.all().filter(study__subject__name= self.subject_name).order_by('value').reverse().distinct()[:self.n]
         context["moreValNoBasicElem"] = moreValNoBasicElem
+        print(moreValNoBasicElem.query)
         return context
 
 
-class MoreValuableBasicElements(Query): #OK
+class MoreValuableBasicElements(Query):
     def __init__(self, n, subject_name) -> None:
         self.n = n
         self.subject_name = subject_name
 
     def execute(self, context):
-        moreValBasicElem = BasicElement.objects.all().filter(imparts__subject__name= self.subject_name).order_by('value').reverse()[:self.n]
+        moreValBasicElem = BasicElement.objects.all().filter(imparts__subject__name= self.subject_name).order_by('value').reverse().distinct()[:self.n]
         context["moreValNoBasicElem"] = moreValBasicElem
         return context
 
 
-class ElementsCreatedByDay(Query): #OK
+class ElementsCreatedByDay(Query):
     def __init__(self, day) -> None:
         self.day = day
 
@@ -121,7 +127,7 @@ class ElementsCreatedByDay(Query): #OK
         return context
 
 
-class ElementsCreatedByMonth(Query): #OK
+class ElementsCreatedByMonth(Query):
     def __init__(self, month) -> None:
         self.month = month
 
@@ -130,7 +136,7 @@ class ElementsCreatedByMonth(Query): #OK
         context["elemCreatedDay"] = elemCreatedMonth
         return context
 
-class ElementsCreatedByYear(Query): #OK
+class ElementsCreatedByYear(Query):
     def __init__(self, year) -> None:
         self.year = year
 
@@ -139,7 +145,7 @@ class ElementsCreatedByYear(Query): #OK
         context["elemCreatedDay"] = elemCreatedYear
         return context
 
-class ElementsCreatedDates(Query): #OK
+class ElementsCreatedDates(Query):
     def __init__(self, initial_date, final_date) -> None:
         self.initial_date = initial_date
         self.final_date = final_date
@@ -149,7 +155,7 @@ class ElementsCreatedDates(Query): #OK
         context["elemCreatedDates"] = elemCreatedDates
         return context
 
-class SubjectStudentsCredits(Query): #OK
+class SubjectStudentsCredits(Query):
     def __init__(self, subject_name) -> None:
         self.subject_name = subject_name
 
@@ -164,7 +170,7 @@ class SubjectStudentsCredits(Query): #OK
         context["subjStudentsCredits"] = subjStudentsCredits
         return context
 
-class SubjectStudentsCreditsN(Query): #OK
+class SubjectStudentsCreditsN(Query):
     def __init__(self, n, subject_name) -> None:
         self.n = n
         self.subject_name = subject_name
@@ -180,7 +186,7 @@ class SubjectStudentsCreditsN(Query): #OK
         context["subjStudentsCreditsN"] = subjStudentsCredits
         return context
 
-class BestStudentBySubject(Query): #OK
+class BestStudentBySubject(Query):
     def execute(self, context):
         subjects = list(Subject.objects.all())
         bestStudentBySubj = []

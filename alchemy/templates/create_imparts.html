@@ -1,36 +1,29 @@
+{% extends "_base_template.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/w3.css' %}">
-    <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style_main_temp.css' %}">
-    <title>Agregar Profesor</title>
-</head>
-<body>
-    <div class="w3-sand w3-grayscale w3-large">
-        <div class="w3-container w3-center w3-padding-64" >
-            <div class="w3-content w3-padding-64" style="max-width:600px">
-                <div class="w3-row w3-center w3-card w3-padding">
-                    <form method="post"> {% csrf_token %}
-                        <select class="w3-input w3-padding-16 w3-border" {{form.professor}} </select>
-                        {%  for professor in object_list %}
-                            <option  value="{{professor.username}}"></option>
-                        {% endfor %}
-                        <br><br>
-                        <button class="w3-button w3-tag w3-dark-grey" type="submit">Agregar</button>
-                    </form>
-                </div> 
-            </div>
+
+{%block title%}
+Agregar Profesor
+{% endblock %}
+
+{% block content %}
+<div class="w3-sand w3-grayscale w3-large" style="min-height: 100%;">
+    <div class="w3-container w3-center w3-padding-64" >
+        <div class="w3-content w3-padding-64" style="max-width:600px">
+            <div class="w3-row w3-center w3-card w3-padding">
+                <form method="post"> {% csrf_token %}
+                    {{form.non_field_errors }}
+                    {{form.professor.errors}}
+                    <select class="w3-input w3-padding-16 w3-border" name="{{form.professor.html_name}}">
+                    {%  for id,username in professors %}
+                    <option value="{{id}}">{{username}}</option>
+                    {% endfor %}
+                    </select>
+                    <br><br>
+                    <button class="w3-button w3-tag w3-dark-grey" type="submit">Agregar</button>
+                </form>
+            </div> 
         </div>
     </div>
-
-    <footer class="w3-center w3-light-grey w3-padding-48 w3-large">
-        <p>Powered by MATCOM</a></p>
-    </footer>
-</body>
-
+</div>
+{% endblock %}
 </html>

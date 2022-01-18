@@ -1,46 +1,40 @@
+{% extends "_base_template.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/w3.css' %}">
-    <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style_main_temp.css' %}">
-    <title>{{study.subject.name}} - {{study.student.username}}</title>
-</head>
-<body>
-    <div class="w3-sand w3-grayscale w3-large">
-        <div class="w3-container w3-center" id="about">
-            <div class="w3-content" style="max-width:60%">
-                <h2 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Bienvenido {{study.student.first_name}} a la asignatura {{study.subject.name}}</span></h2>
-                <h4 class="w3-left "><span class=" w3-wide">Total de créditos obtenidos en todas las asignaturas: <u>{{study.student.credits}}</u></span></h4>
-                <br><br>
-                <h4 class="w3-left "><span class=" w3-wide">Créditos obtenidos en esta asignatura: <u>{{study.credits}}</u></span></h4>
-                <br><br>
-                <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Profesores de la asignatura</span></h4>
-                <div class="w3-content" style="max-width:65%">
-                    <table class="w3-table-all">
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Apellidos</th>
-                                <th>Correo electrónico</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for imp in imparts %}
-                            <tr>
-                                <td>{{imp.professor.first_name}}</td>
-                                <td>{{imp.professor.last_name}}</td>
-                                <td>{{imp.professor.email}}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+
+{%block title%}
+{{study.subject.name}} - {{study.student.username}}
+{% endblock %}
+
+{% block content %}
+<div class="w3-sand w3-grayscale w3-large">
+    <div class="w3-content w3-padding-64" style="max-width:800px">
+        <h3 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Bienvenido {{study.student.first_name}} a la asignatura {{study.subject.name}}</span></h2>
+        <h4 class="w3-left "><span class=" w3-wide">Total de créditos obtenidos en todas las asignaturas: <u>{{study.student.credits}}</u></span></h4>
+        <br><br>
+        <h4 class="w3-left "><span class=" w3-wide">Créditos obtenidos en esta asignatura: <u>{{study.credits}}</u></span></h4>
+        <br><br>
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Profesores de la asignatura</span></h4>
+        <div class="w3-content" style="max-width:65%">
+            <table class="w3-table-all">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Correo electrónico</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for imp in imparts %}
+                    <tr>
+                        <td>{{imp.professor.first_name}}</td>
+                        <td>{{imp.professor.last_name}}</td>
+                        <td>{{imp.professor.email}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    
 
         <br> <br>
         <h4 class="w3-center w3-padding-32"><span class="w3-tag w3-wide">Opciones</span></h4>
@@ -54,10 +48,7 @@
             <a class="w3-button w3-tag w3-dark-grey" href="{% url 'pending_list' study.subject.id %}">Elementos pendientes</a>
         </div>
     </div>
-
-    <footer class="w3-center w3-light-grey w3-padding-48 w3-large">
-        <p>Powered by MATCOM</a></p>
-    </footer>
-</body>
+</div>
+{% endblock %}
 
 </html>

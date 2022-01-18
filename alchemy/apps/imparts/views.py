@@ -24,12 +24,15 @@ def create_imparts(request,pk):
     if request.method=='GET':
         form=ImpartsCreateForm()
         context={
-            'form':form
+            'form':form,
+            'professors':profs
+
         }
     else:
         form=ImpartsCreateForm(request.POST)
         context={
-            'form':form
+            'form':form,
+            'professors':profs
         }
         imparts=Imparts()
         if form.is_valid():

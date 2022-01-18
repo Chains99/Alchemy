@@ -1,51 +1,39 @@
+{% extends "_base_template.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/w3.css' %}">
-    <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style_main_temp.css' %}">
-    <title>Elementos aceptados {{study.subject.name}}</title>
-</head>
-<body>
-<div class="w3-sand w3-grayscale w3-large">
-    <div class="w3-container w3-center" id="about">
-        <div class="w3-content" style="max-width:50%">
-          <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Estos son tus elementos aceptados en la asignatura {{study.subject.name}}</span></h4>
-    
-    <table class="w3-table-all">
-        <thead>
-            <tr>
-                <th>Nombre del elemento</th>
-                <th>Valor</th>
-                <th>Elemento 1 usado</th>
-                <th>Elemento 2 usado</th>
-                <th>Justificación</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for element in non_basic_elements %}
-            <tr>
-                <td>{{element.name}}</td>
-                <td>{{element.value}}</td>
-                <td>{{element.element1.name}}</td>
-                <td>{{element.element2.name}}</td>
-                <td>{{element.justification}}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    
-</div>
-</div>
-</div>
 
-<footer class="w3-center w3-light-grey w3-padding-48 w3-large">
-    <p>Powered by MATCOM</a></p>
-</footer>
-</body>
+{%block title%}
+Elementos aceptados {{study.subject.name}}
+{% endblock %}
+
+{% block content %}
+<div class="w3-sand w3-grayscale w3-large" style="min-height: 100%;">
+    <div class="w3-content w3-padding-64" style="max-width:700">
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Estos son tus elementos aceptados en la asignatura {{study.subject.name}}</span></h4>
+
+        <table class="w3-table-all">
+            <thead>
+                <tr>
+                    <th>Nombre del elemento</th>
+                    <th>Valor</th>
+                    <th>Elemento 1 usado</th>
+                    <th>Elemento 2 usado</th>
+                    <th>Justificación</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for element in non_basic_elements %}
+                <tr>
+                    <td>{{element.name}}</td>
+                    <td>{{element.value}}</td>
+                    <td>{{element.element1.name}}</td>
+                    <td>{{element.element2.name}}</td>
+                    <td>{{element.justification}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
 
 </html>

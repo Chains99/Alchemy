@@ -1,19 +1,15 @@
+{% extends "_base_template.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/w3.css' %}">
-    <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style_main_temp.css' %}">
-    <title>Respuesta de la Consulta</title>
-</head>
-<div class="w3-content w3-padding-64" style="max-width:700px">
-    <body>
+
+{%block title%}
+Respuesta de la Consulta
+{% endblock %}
+
+{% block content %}
+<div class="w3-sand w3-grayscale w3-large" style="min-height: 100%;">
+    <div class="w3-content w3-padding-64" style="max-width:700px">
         {%if moreCredits%}
-        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Estudiantes con mas créditos</span></h4>
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Estudiantes con más créditos</span></h4>
         <table class="w3-table-all">
             <thead>
                 <tr>
@@ -34,12 +30,9 @@
                 {%endfor%}
             </tbody>
         </table>
-        {% endif %}
-    </body>
 
-    <body>
-        {%if moreElemCreated%}
-        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Estudiantes con mas elementos creados</span></h4>
+        {%elif moreElemCreated%}
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Estudiantes con más elementos creados</span></h4>
         <table class="w3-table-all">
             <thead>
                 <tr>
@@ -60,38 +53,32 @@
                 {%endfor%}
             </tbody>
         </table>
-        {% endif %}
-    </body>
 
-    <body>
-        {%if moreBasicElemUsed%}
-        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Elementos mas utilizados para realizar mezclas</span></h4>
+        {%elif moreElemUsed%}
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Elementos más utilizados para realizar mezclas</span></h4>
         <table class="w3-table-all">
             <thead>
                 <tr>
                     <th>Nombre</th>
                     <th>Cantidad</th>
                     <th>Valor</th>
-                    <th>Asignatura</th>
                 </tr>
             </thead>
             <tbody>
-                {%for elem in moreBasicElemUsed%}
+                {%for elem in moreElemUsed%}
                 <tr>
                     <td>{{elem.name}}</td>
                     <td>{{elem.cant_elem1}}</td>
                     <td>{{elem.value}}</td>
-                    <td>{{elem.subject}}</td>
                 </tr>
                 {%endfor%}
             </tbody>
         </table>
-        {% endif %}
-    </body>
+      
 
-    <body>
-        {%if moreValNoBasicElem%}
-        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Elementos mas utilizados para realizar mezclas</span></h4>
+
+        {%elif moreValNoBasicElem%}
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Elementos más valiosos </span></h4>
         <table class="w3-table-all">
             <thead>
                 <tr>
@@ -108,12 +95,10 @@
                 {%endfor%}
             </tbody>
         </table>
-        {% endif %}
-    </body>
 
 
-    <body>
-        {%if elemCreatedDay%}
+
+        {%elif elemCreatedDay%}
         <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Elementos creados en el dia</span></h4>
         <table class="w3-table-all">
             <thead>
@@ -137,11 +122,9 @@
                 {%endfor%}
             </tbody>
         </table>
-        {% endif %}
-    </body>
-
-    <body>
-        {%if elemCreatedMonth%}
+ 
+ 
+        {%elif elemCreatedMonth%}
         <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Elementos creados en el mes</span></h4>
         <table class="w3-table-all">
             <thead>
@@ -165,11 +148,10 @@
                 {%endfor%}
             </tbody>
         </table>
-        {% endif %}
-    </body>
+     
 
-    <body>
-        {%if elemCreatedYear%}
+
+        {%elif elemCreatedYear%}
         <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Elementos creados en el año</span></h4>
         <table class="w3-table-all">
             <thead>
@@ -193,11 +175,10 @@
                 {%endfor%}
             </tbody>
         </table>
-        {% endif %}
-    </body>
+     
 
-    <body>
-        {%if elemCreatedDates%}
+  
+        {%elif elemCreatedDates%}
         <h2 class="title text-center"> Elementos creados en un intervalo de fechas </h2>
         <table class="w3-table-all">
             <thead>
@@ -221,11 +202,10 @@
                 {%endfor%}
             </tbody>
         </table>
-        {% endif %}
-    </body>
+       
     
-    <body>
-        {%if subjStudentsCredits%}
+    
+        {%elif subjStudentsCredits%}
         <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Ranking de estudiantes en una asignatura</span></h4>
         <table class="w3-table-all">
             <thead>
@@ -245,12 +225,12 @@
                 {%endfor%}
             </tbody>
         </table>
-        {% endif %}
-    </body>
 
-    <body>
-        {%if subjStudentsCreditsN%}
-        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Estudiantes con mas elementos creados</span></h4>
+       
+
+    
+        {%elif subjStudentsCreditsN%}
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Estudiantes con más créditos acumulados en la asignatura</span></h4>
         <table class="w3-table-all">
             <thead>
                 <tr>
@@ -269,11 +249,11 @@
                 {%endfor%}
             </tbody>
         </table>
-        {% endif %}
-    </body>
 
-    <body>
-        {%if bestStudentBySubj%}
+        
+
+    
+        {%elif bestStudentBySubj%}
         <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Mejor estudiante por asignatura</span></h4>
         <table class="w3-table-all">
             <thead>
@@ -295,11 +275,10 @@
                 {%endfor%}
             </tbody>
         </table>
-        {% endif %}
-    </body>
+        
 
-    <body>
-        {%if rankingDatesTotalCredits%}
+    
+        {%elif rankingDatesTotalCredits%}
         <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Ranking de estudiantes por créditos totales en un intervalo de fechas</span></h4>
         <table class="w3-table-all">
             <thead>
@@ -319,11 +298,10 @@
                 {%endfor%}
             </tbody>
         </table>
-        {% endif %}
-    </body>
+        
 
-    <body>
-        {%if rankingDatesSubjectCredits%}
+    
+        {%elif rankingDatesSubjectCredits%}
         <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Ranking de estudiantes por créditos totales en un intervalo de fechas</span></h4>
         <table class="w3-table-all">
             <thead>
@@ -343,7 +321,12 @@
                 {%endfor%}
             </tbody>
         </table>
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">No hay respuesta a esta consulta</span></h4>
+        
+        {% else %}
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">No hay respuesta a esta consulta</span></h4>
         {% endif %}
-    </body>
+    </div>
 </div>
+{% endblock %}
 </html>

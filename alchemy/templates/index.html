@@ -1,91 +1,30 @@
+{% extends "_base_template.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/w3.css' %}">
-    <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style_main_temp.css' %}">
-    <title>{% block title%} Alquimia {%endblock%} </title>
-</head>
-<body>
-  <div class="w3-top">   
-    <div class="w3-row w3-padding w3-black"> 
-      <div class="w3-col s2">
-        <a  class="w3-button w3-block w3-black" href="{% url 'index' %}">Inicio</a>
-      </div>  
-      {%if perms.subjects.view_subject%}    
-      <div class="w3-col s2">         
-        <a class="w3-button w3-block w3-black" href="{% url 'subjects' %}" >Asignaturas</a>
-      </div>
-      {%endif%}
-      {% if user.is_authenticated %}
-      <div class="w3-col s2">
-        <a class="w3-button w3-block w3-black"  href="{% url 'edit_user' user.id %}">Editar perfil</a>
-      </div>
-      <div class="w3-col s2">
-        <a class="w3-button w3-block w3-black" href="{% url 'logout' %}">Cerrar sesión</a>
-      </div>
-      {% else %}
-      <div class="w3-col s3">
-        <a class="w3-button w3-block w3-black" href="{% url 'login' %}">Iniciar sesión</a>
-      </div>
-      <div class="w3-col s3">
-        <a class="w3-button w3-block w3-black" href="{% url 'register_student' %}">Crear cuenta</a>
-      </div>
-      {% endif %}
-      <div class="w3-col s3">
-        <a class="w3-button w3-block w3-black" href="{% url 'queries' %}">Consultas</a>
-      </div>
-      {% if perms.admins.view_admin %}
-      <div class="w3-col s3">
-        <a class="w3-button w3-block w3-black" href="{% url 'admins' %}">Administradores</a>
-      </div>
-      {% endif %}          
-              
-      {% if perms.professors.view_professor %}
-      <div class="w3-col s3">                        
-        <a class="w3-button w3-block w3-black" href="{% url 'professors' %}">Profesores</a>
-      </div>                              
-      {% endif %}
 
-      {% if perms.students.view_student %} 
-      <div class="w3-col s3">                                               
-        <a class="w3-button w3-block w3-black" href="{% url 'students' %}">Estudiantes</a>
-      </div>                       
-      {% endif %}
-    </div>  
+{%block title%}
+Inicio
+{% endblock %}
+
+{% block content %}
+<header class="bgimg w3-display-container w3-grayscale-min" id="home">
+  <div class="w3-display-middle w3-center">
+    <span class="w3-text-white" style="font-size:90px">Alquimia</span>
   </div>
+</header>
       
-      <!-- Header with image -->
-      
-      <header class="bgimg w3-display-container w3-grayscale-min" id="home">
-        <div class="w3-display-middle w3-center">
-          <span class="w3-text-white" style="font-size:90px">Alquimia</span>
-        </div>
-      </header>
-      
-      <!-- Add a background color and large text to the whole page -->
-      <div class="w3-sand w3-grayscale w3-large">
-      
-      <!-- About Container -->
-      <div class="w3-container" id="about">
-        <div class="w3-content" style="max-width:700px">
-          <h5 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Acerca de la Alquimia</span></h5>
-          <p>En esta aplicación web se presentan diferentes asignaturas. Los estudiantes se puedan matricular en ellas</p>
+<div class="w3-sand w3-grayscale w3-large">
+  <div class="w3-container" id="about">
+    <div class="w3-content" style="max-width:700px">
+      <h5 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Acerca de la Alquimia</span></h5>
+      <p>En esta aplicación web se presentan diferentes asignaturas. Los estudiantes se puedan matricular en ellas</p>
 
-          <p>El profesor de una asignatura define los elementos básicos de esa asignatura y el valor en créditos de cada elemento que defina.</p>
+      <p>El profesor de una asignatura define los elementos básicos de esa asignatura y el valor en créditos de cada elemento que defina.</p>
             
-          <p>Si un estudiante está matriculado en una asignatura este puede acceder a una página que le permite hacer mezclas con los elementos que él posee de dicha asignatura. La forma de hacerlo es que este escoja dos elementos que posee y con eso determine un tercero dando una justificación de porqué hace esa mezcla. Para las mezclas, un estudiante solo pueden utilizar los elementos básicos o los que haya formado.</p>
+      <p>Si un estudiante está matriculado en una asignatura este puede acceder a una página que le permite hacer mezclas con los elementos que él posee de dicha asignatura. La forma de hacerlo es que este escoja dos elementos que posee y con eso determine un tercero dando una justificación de porqué hace esa mezcla. Para las mezclas, un estudiante solo pueden utilizar los elementos básicos o los que haya formado.</p>
             
-          <p>Luego un profe de la asignatura revisa las "solicitudes" de mezclas propuestas por los estudiantes y las valida o no. Si la valida el estudiante gana créditos igual a la suma de los créditos de los elementos que usó para formar la mezcla y ese elemento que formó pasa a ser suyo. Además el valor del elemento obtenido es igual a la cantidad de créditos que ganó por hacer dicha mezcla.</p>
-        </div>
-      </div>
-
-      <footer class="w3-center w3-light-grey w3-padding-48 w3-large">
-        <p>Powered by MATCOM</a></p>
-      </footer>
-</body>
+      <p>Luego un profe de la asignatura revisa las "solicitudes" de mezclas propuestas por los estudiantes y las valida o no. Si la valida el estudiante gana créditos igual a la suma de los créditos de los elementos que usó para formar la mezcla y ese elemento que formó pasa a ser suyo. Además el valor del elemento obtenido es igual a la cantidad de créditos que ganó por hacer dicha mezcla.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}
 </html>
