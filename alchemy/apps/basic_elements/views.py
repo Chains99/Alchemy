@@ -8,10 +8,17 @@ from datetime import datetime
 from apps.imparts.models import Imparts
 from .models import BasicElement
 from .forms import BasicElementCreateForm
+from apps.students.models import Student
 
 @permission_required('basic_elements.view_basicelement')
 def basic_element_list(request,pk):
-    basic_elements=BasicElement.objects.filter(imparts__subject=pk)
+    try:
+        Student.objects.get(id=request.user.id)
+    except:
+        basic_elements=BasicElement.objects.filter(imparts__subject=pk)
+        return render(request,'basic_elements.html',{'pk':pk,'basic_elements':basic_elements})
+
+    basic_elements=BasicElement.objects.filter(imparts__subject=pk,visible=True)
     return render(request,'basic_elements.html',{'pk':pk,'basic_elements':basic_elements})
 
 class BasicElementCreate(PermissionRequiredMixin,CreateView):
