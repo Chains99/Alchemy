@@ -1,0 +1,48 @@
+{% load static %}
+<div class="w3-top" >   
+    <div class="w3-row w3-padding w3-black" style="justify-content:center;display: flex;"> 
+      <div class="w3-col s1">
+        <a  class="w3-button w3-block w3-black" href="{% url 'index' %}">Inicio</a>
+      </div>  
+      {%if perms.subjects.view_subject%}    
+      <div class="w3-col s1">         
+        <a class="w3-button w3-block w3-black" href="{% url 'subjects' %}" >Asignaturas</a>
+      </div>
+      {%endif%}
+      <div class="w3-col s1">
+        <a class="w3-button w3-block w3-black" href="{% url 'queries' %}">Consultas</a>
+      </div>
+      {% if perms.admins.view_admin %}
+      <div class="w3-col s1">
+        <a class="w3-button w3-block w3-black" href="{% url 'admins' %}">Administradores</a>
+      </div>
+      {% endif %}          
+              
+      {% if perms.professors.view_professor %}
+      <div class="w3-col s1">                        
+        <a class="w3-button w3-block w3-black" href="{% url 'professors' %}">Profesores</a>
+      </div>                              
+      {% endif %}
+
+      {% if perms.students.view_student %} 
+      <div class="w3-col s1">                                               
+        <a class="w3-button w3-block w3-black" href="{% url 'students' %}">Estudiantes</a>
+      </div>                       
+      {% endif %}
+      {% if user.is_authenticated %}
+      <div class="w3-col s1">
+        <a class="w3-button w3-block w3-black"  href="{% url 'edit_user' user.id %}">Editar perfil</a>
+      </div>
+      <div class="w3-col s1">
+        <a class="w3-button w3-block w3-black" href="{% url 'logout' %}">Cerrar sesión</a>
+      </div>
+      {% else %}
+      <div class="w3-col s1">
+        <a class="w3-button w3-block w3-black" href="{% url 'login' %}">Iniciar sesión</a>
+      </div>
+      <div class="w3-col s1">
+        <a class="w3-button w3-block w3-black" href="{% url 'register_student' %}">Crear cuenta</a>
+      </div>
+      {% endif %}
+    </div>  
+</div>

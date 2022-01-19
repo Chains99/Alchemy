@@ -1,0 +1,294 @@
+{% extends "_base_template.html" %}
+{% load static %}
+
+{%block title%}
+Respuesta de la Consulta
+{% endblock %}
+
+{% block content %}
+<div class="w3-sand w3-grayscale w3-large" style="min-height: 100%;">
+    <div class="w3-content w3-padding-64" style="max-width:700px">
+        {%if moreCreditsq%}
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Estudiantes con más créditos</span></h4>
+        <table class="w3-table-all">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Email</th>
+                    <th>Total de Creditos</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for student in moreCreditsq%}
+                <tr>
+                    <td>{{student.first_name}}</td>
+                    <td>{{student.last_name}}</td>
+                    <td>{{student.email}}</td>
+                    <td>{{student.credits}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+
+        {%elif moreElemCreatedq%}
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Estudiantes con más elementos creados</span></h4>
+        <table class="w3-table-all">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Cant de Elems</th>
+                    <th>Total de creditos</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for student in moreElemCreatedq%}
+                <tr>
+                    <td>{{student.firstname}}</td>
+                    <td>{{student.lastname}}</td>
+                    <td>{{student.count_elem}}</td>
+                    <td>{{student.credits}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+
+        {%elif moreElemUsedq%}
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Elementos más utilizados para realizar mezclas</span></h4>
+        <table class="w3-table-all">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Cantidad</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for elem in moreElemUsedq%}
+                <tr>
+                    <td>{{elem.name}}</td>
+                    <td>{{elem.cant_elem1}}</td>
+                    <td>{{elem.value}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+      
+        {%elif moreValNoBasicElemq%}
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Elementos más valiosos </span></h4>
+        <table class="w3-table-all">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for elem in moreValNoBasicElemq%}
+                <tr>
+                    <td>{{elem.name}}</td>
+                    <td>{{elem.value}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+        
+        {%elif moreValBasicElemq%}
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Elementos más valiosos </span></h4>
+        <table class="w3-table-all">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for elem in moreValBasicElemq%}
+                <tr>
+                    <td>{{elem.name}}</td>
+                    <td>{{elem.value}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+
+        {%elif elemCreatedYearq%}
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Elementos creados en el año</span></h4>
+        <table class="w3-table-all">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Fecha de creacion</th>
+                    <th>Estudiante</th>
+                    <th>Apellidos</th>
+                    <th>Asignatura</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for elem in elemCreatedYearq%}
+                <tr>
+                    <td>{{elem.name}}</td>
+                    <td>{{elem.date_time_creation}}</td>
+                    <td>{{elem.study.student.first_name}}</td>
+                    <td>{{elem.study.student.last_name}}</td>
+                    <td>{{elem.study.subject.name}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+     
+
+  
+        {%elif elemCreatedDatesq%}
+        <h2 class="title text-center"> Elementos creados en un intervalo de fechas </h2>
+        <table class="w3-table-all">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Fecha de creacion</th>
+                    <th>Estudiante</th>
+                    <th>Apellidos</th>
+                    <th>Asignatura</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for elem in elemCreatedDatesq%}
+                <tr>
+                    <td>{{elem.name}}</td>
+                    <td>{{elem.date_time_creation}}</td>
+                    <td>{{elem.study.student.first_name}}</td>
+                    <td>{{elem.study.student.last_name}}</td>
+                    <td>{{elem.study.subject.name}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+       
+    
+    
+        {%elif subjStudentsCreditsq%}
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Ranking de estudiantes en una asignatura</span></h4>
+        <table class="w3-table-all">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Creditos</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for student in subjStudentsCreditsq%}
+                <tr>
+                    <td>{{student.firstname}}</td>
+                    <td>{{student.lastname}}</td>
+                    <td>{{student.credits}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+
+       
+
+    
+        {%elif subjStudentsCreditsNq%}
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Estudiantes con más créditos acumulados en la asignatura</span></h4>
+        <table class="w3-table-all">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Creditos</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for student in subjStudentsCreditsNq%}
+                <tr>
+                    <td>{{student.firstname}}</td>
+                    <td>{{student.lastname}}</td>
+                    <td>{{student.credits}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+
+        
+
+    
+        {%elif bestStudentBySubjq%}
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Mejor estudiante por asignatura</span></h4>
+        <table class="w3-table-all">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Creditos</th>
+                    <th>Asignatura</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for student in bestStudentBySubjq%}
+                <tr>
+                    <td>{{student.firstname}}</td>
+                    <td>{{student.lastname}}</td>
+                    <td>{{student.credits}}</td>
+                    <td>{{student.subject}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+        
+
+    
+        {%elif rankingDatesTotalCreditsq%}
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Ranking de estudiantes por créditos totales en un intervalo de fechas</span></h4>
+        <table class="w3-table-all">
+            <thead>
+                <tr>
+                    <th>Estudiante</th>
+                    <th>Apellidos</th>
+                    <th>Creditos acumulados entre esas fechas</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for student in rankingDatesTotalCreditsq%}
+                <tr>
+                    <td>{{student.first_name}}</td>
+                    <td>{{student.last_name}}</td>
+                    <td>{{student.credits_acum}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+        
+
+    
+        {%elif rankingDatesSubjectCreditsq%}
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Ranking de estudiantes por créditos totales en un intervalo de fechas</span></h4>
+        <table class="w3-table-all">
+            <thead>
+                <tr>
+                    <th>Estudiante</th>
+                    <th>Apellidos</th>
+                    <th>Creditos acumulados entre esas fechas</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for student in rankingDatesSubjectCreditsq%}
+                <tr>
+                    <td>{{student.first_name}}</td>
+                    <td>{{student.last_name}}</td>
+                    <td>{{student.credits_acum}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">No hay respuesta a esta consulta</span></h4>
+        
+        {% else %}
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">No hay respuesta a esta consulta</span></h4>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+</html>

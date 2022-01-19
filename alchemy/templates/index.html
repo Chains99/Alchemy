@@ -1,0 +1,30 @@
+{% extends "_base_template.html" %}
+{% load static %}
+
+{%block title%}
+Inicio
+{% endblock %}
+
+{% block content %}
+<header class="bgimg w3-display-container w3-grayscale-min" id="home">
+  <div class="w3-display-middle w3-center">
+    <span class="w3-text-white" style="font-size:90px">Alquimia</span>
+  </div>
+</header>
+      
+<div class="w3-sand w3-grayscale w3-large">
+  <div class="w3-container" id="about">
+    <div class="w3-content" style="max-width:700px">
+      <h5 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Acerca de la Alquimia</span></h5>
+      <p>En esta aplicación web se presentan diferentes asignaturas. Los estudiantes se puedan matricular en ellas</p>
+
+      <p>El profesor de una asignatura define los elementos básicos de esa asignatura y el valor en créditos de cada elemento que defina.</p>
+            
+      <p>Si un estudiante está matriculado en una asignatura este puede acceder a una página que le permite hacer mezclas con los elementos que él posee de dicha asignatura. La forma de hacerlo es que este escoja dos elementos que posee y con eso determine un tercero dando una justificación de porqué hace esa mezcla. Para las mezclas, un estudiante solo pueden utilizar los elementos básicos o los que haya formado.</p>
+            
+      <p>Luego un profe de la asignatura revisa las "solicitudes" de mezclas propuestas por los estudiantes y las valida o no. Si la valida el estudiante gana créditos igual a la suma de los créditos de los elementos que usó para formar la mezcla y ese elemento que formó pasa a ser suyo. Además el valor del elemento obtenido es igual a la cantidad de créditos que ganó por hacer dicha mezcla.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}
+</html>

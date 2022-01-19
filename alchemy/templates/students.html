@@ -1,0 +1,41 @@
+{% extends "_base_template.html" %}
+{% load static %}
+
+{%block title%}
+Estudiantes
+{% endblock %}
+
+{% block content %}
+<div class="w3-sand w3-grayscale w3-large" style="min-height: 100%;">
+    <div class="w3-content w3-padding-64" style="max-width:1000px">
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Estudiantes</span></h4>
+        <table class="w3-table-all">
+            <thead>
+                <tr>
+                    <th>Nombre de usuario</th>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Correo electrónico</th>
+                    {% if perms.students.delete_student %}
+                        <th>Eliminar estudiante</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in object_list %}
+                <tr>
+                    <td>{{student.username}}</td>
+                    <td>{{student.first_name}}</td>
+                    <td>{{student.last_name}}</td>
+                    <td>{{student.email}}</td>
+                    {% if perms.professors.delete_professor %}                    
+                    <td><a class="w3-button w3-tag w3-dark-grey" href="{% url 'delete_student' student.id %}">Eliminar</a></td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+</html>

@@ -1,0 +1,41 @@
+{% extends "_base_template.html" %}
+{% load static %}
+
+{%block title%}
+Elementos pendientes {{study.subject.name}}
+{% endblock %}
+
+{% block content %}
+<div class="w3-sand w3-grayscale w3-large" style="min-height: 100%;">
+    <div class="w3-content w3-padding-64" style="max-width:60%">
+        <h4 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Estos son tus elementos pendientes en la asignatura {{study.subject.name}}</span></h4>
+    
+        <table class="w3-table-all">
+            <thead>
+                <tr>
+                    <th>Nombre del elemento</th>
+                    <th>Valor</th>
+                    <th>Elemento 1 usado</th>
+                    <th>Elemento 2 usado</th>
+                    <th>Justificación</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for element in non_basic_elements %}
+                <tr>
+                    <td>{{element.name}}</td>
+                    <td>{{element.value}}</td>
+                    <td>{{element.element1.name}}</td>
+                    <td>{{element.element2.name}}</td>
+                    <td>{{element.justification}}</td>
+                    <td><a class="w3-button w3-tag w3-dark-grey" href="{% url 'delete_non_basic_element' element.id %}">Eliminar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    
+    </div>
+</div>
+{% endblock %}
+</html>
